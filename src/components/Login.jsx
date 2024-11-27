@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import postFetch from "../helpers/postFetch";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -11,42 +12,6 @@ const Login = () => {
       setUser({ ...user, [event.target.id]: event.target.value });
     }
 
-    // This function is being used in two places. It can be extracted to a helpers.js file
-    async function postFetch(user) {
-      console.log("URL:", URL);
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-  
-        body: JSON.stringify(user),
-      };
-  
-      try {
-        const res = await fetch(`${URL}/api/auth/login`, options);
-        
-        if (!res.ok) {
-          const errorMessage = await res.text(); 
-          alert(`Login failed: ${errorMessage}`);
-          setUser({ email: "", password: "" });
-          throw new Error("Login failed");
-        }
-        const data = await res.json();
-  
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          // await setToggleLogin(true);
-          navigate("/dashboard")
-          console.log("JWT Login Success!")
-        } else {
-          console.log("JWT Login Failed");
-        }
-      } catch (error) {
-        console.error("Error during login:", error);
-      }
-    }
-  
     // Login Function
     async function handleSubmit(e) {
       e.preventDefault();
@@ -54,14 +19,14 @@ const Login = () => {
         alert("You must enter an email and password");
         return;
       }
-      postFetch(user);
+      postFetch(user, URL, navigate);
     }
   
     //Demo User Login Function
     async function handleDemoSignIn(e) {
       e.preventDefault();
       const user = { email: "demo@me.com", password: "password" };
-      postFetch(user);
+      postFetch(user, URL, navigate);
     }
 
     return (
