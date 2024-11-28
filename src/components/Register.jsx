@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import userLogInPostFetch from "../helpers/userLogInPostFetch.js.";
+import userLogInPostFetch from "../helpers/userLogInPostFetch";
 
 
 const Register = () => {
@@ -48,66 +48,59 @@ const Register = () => {
   }
 
   return (
-    <div className="mt-5 text-center container-sm">
-      <h5 className="mt-4 mb-5">
-        Already have an account? <Link to="/login">Login</Link>
-      </h5>
-      {/* <h4 className="mb-2 mt-5">Register</h4> */}
-      <form onSubmit={handleSubmit} className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="mb-3">
+    <div className="min-vh-100 d-flex align-items-center p-3 bg-info bg-opacity-25">
+      <div className="card shadow-sm mx-auto" style={{ width: "100%", maxWidth: "400px" }}>
+        <div className="card-body p-3 p-sm-4">
+          <h2 className="text-center mb-4 fs-3">Register</h2>
+          <div className="text-center mb-4">
+            Already have an account? <Link to="/login">Login</Link>
+          </div>
+          
+          <form onSubmit={handleSubmit}>
             <input
-            className="form-control text-center"
+              className="form-control form-control-lg mb-3"
               id="email"
               value={user.email}
               type="email"
-              placeholder="email"
+              placeholder="Email"
               onChange={handleChange}
               autoComplete="email"
               required
             />
-          </div>
-          <div className="mb-3">
             <input
-            className="form-control text-center"
+              className="form-control form-control-lg mb-3"
               id="password"
               value={user.password}
               type="password"
-              placeholder="password"
+              placeholder="Password"
               onChange={handleChange}
               autoComplete="new-password"
               required
             />
-          </div>
-          <div className="mb-3">
             <input
-            className="form-control text-center"
+              className="form-control form-control-lg mb-3"
               id="first_name"
               value={user.first_name}
               type="text"
-              placeholder="first name"
+              placeholder="First Name"
               onChange={handleChange}
               autoComplete="given-name"
               required
             />
-          </div>
-          <div className="mb-3">
             <input
-            className="form-control text-center"
+              className="form-control form-control-lg mb-3"
               id="last_name"
               value={user.last_name}
               type="text"
-              placeholder="last name"
+              placeholder="Last Name"
               onChange={handleChange}
-              autoComplete="last-name"
+              autoComplete="family-name"
               required
             />
-          </div>
+            <button className="btn btn-info btn-lg w-100">Sign Up</button>
+          </form>
         </div>
-        <div>
-          <button className="btn btn-info btn-sm">Sign Up</button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
