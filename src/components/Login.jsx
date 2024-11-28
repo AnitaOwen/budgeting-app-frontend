@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import postFetch from "../helpers/postFetch";
+import userLogInPostFetch from "../helpers/userLogInPostFetch.js.";
 
 const Login = () => {
-    const navigate = useNavigate();
-    const URL = import.meta.env.VITE_BASE_URL;
 
     const [user, setUser] = useState({ email: "", password: "" });
+    
+    const URL = import.meta.env.VITE_BASE_URL;
+    const navigate = useNavigate();
+    
+
   
     function handleChange(event) {
       setUser({ ...user, [event.target.id]: event.target.value });
@@ -19,39 +22,35 @@ const Login = () => {
         alert("You must enter an email and password");
         return;
       }
-      postFetch(user, URL, navigate);
+      userLogInPostFetch(user, URL, navigate);
     }
   
     //Demo User Login Function
     async function handleDemoSignIn(e) {
       e.preventDefault();
       const user = { email: "demo@me.com", password: "password" };
-      postFetch(user, URL, navigate);
+      userLogInPostFetch(user, URL, navigate);
     }
 
     return (
         <div className="mt-5 container-sm text-center">
           <h2 className="mt-4 mb-4">Welcome!</h2>
           <button onClick={handleDemoSignIn} className="btn btn-dark btn-sm mb-4">Demo User</button>
-          <h4 className="mt-4">Login</h4>
+          {/* <h4 className="mt-4">Login</h4> */}
           <form onSubmit={handleSubmit} className="row justify-content-center">
             <div className="col-md-6">
-              <div>
-                {/* <label htmlFor="username" className="form-label">
-                </label> */}
+              <div className="mb-3">
                 <input
                   className="form-control text-center"
                   id="email"
                   value={user.email}
-                  type="text"
+                  type="email"
                   placeholder="email"
                   autoComplete="email"
                   onChange={handleChange}
                 />
               </div>
               <div className="mb-3 mt-3">
-                {/* <label htmlFor="password" className="form-label" >
-                </label> */}
                 <input
                 className="form-control text-center"
                   id="password"
@@ -63,7 +62,7 @@ const Login = () => {
               </div>
             </div>
             <div>
-              <button className="btn btn-info btn-sm mb-4">Submit</button>
+              <button className="btn btn-info btn-sm mb-4">Log In</button>
     
             </div>
             
