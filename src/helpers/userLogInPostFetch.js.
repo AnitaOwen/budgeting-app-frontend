@@ -13,12 +13,10 @@ async function userLogInPostFetch(user, URL, navigate) {
       const res = await fetch(`${URL}/api/auth/login`, options);
       
       if (!res.ok) {
-        const errorMessage = await res.text(); 
-        alert(`Login failed: ${errorMessage}`);
         setUser({ email: "", password: "" });
         throw new Error("Login failed");
       }
-      
+
       const data = await res.json();
 
       if (data.token) {

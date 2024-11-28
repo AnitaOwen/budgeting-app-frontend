@@ -31,8 +31,6 @@ const Register = () => {
       const res = await fetch(`${URL}/api/auth/register`, options);
 
       if (!res.ok) {
-        const errorMessage = await res.text(); 
-        alert(`Login failed: ${errorMessage}`);
         setUser({ email: "", password: "" });
         throw new Error("Registration failed");
       }
@@ -66,6 +64,7 @@ const Register = () => {
               placeholder="email"
               onChange={handleChange}
               autoComplete="email"
+              required
             />
           </div>
           <div className="mb-3">
@@ -77,6 +76,7 @@ const Register = () => {
               placeholder="password"
               onChange={handleChange}
               autoComplete="new-password"
+              required
             />
           </div>
           <div className="mb-3">
@@ -88,6 +88,7 @@ const Register = () => {
               placeholder="first name"
               onChange={handleChange}
               autoComplete="given-name"
+              required
             />
           </div>
           <div className="mb-3">
@@ -99,6 +100,7 @@ const Register = () => {
               placeholder="last name"
               onChange={handleChange}
               autoComplete="last-name"
+              required
             />
           </div>
         </div>

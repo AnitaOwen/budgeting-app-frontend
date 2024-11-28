@@ -18,10 +18,6 @@ const Login = () => {
     // Login Function
     async function handleSubmit(e) {
       e.preventDefault();
-      if (!user.email|| !user.password) {
-        alert("You must enter an email and password");
-        return;
-      }
       userLogInPostFetch(user, URL, navigate);
     }
   
@@ -48,6 +44,7 @@ const Login = () => {
                   placeholder="email"
                   autoComplete="email"
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="mb-3 mt-3">
@@ -58,6 +55,7 @@ const Login = () => {
                   placeholder="password"
                   onChange={handleChange}
                   autoComplete="current-password"
+                  required
                 />
               </div>
             </div>
