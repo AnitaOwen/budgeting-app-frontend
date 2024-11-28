@@ -7,12 +7,37 @@ const Register = () => {
 
   const [user, setUser] = useState({ email: "", password: "", first_name: "", last_name: ""});
 
+  const [passwordStrength, setPasswordStrength] = useState("");
+
   const URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
 
 
   function handleChange(event) {
     setUser({ ...user, [event.target.id]: event.target.value });
+
+    if (event.target.id === 'password') {
+      const password = event.target.value;
+      let strength = "";
+      let color = "";
+      
+      if (password.length >= 8 && 
+          /[A-Z]/.test(password) && 
+          /[a-z]/.test(password) && 
+          /\d/.test(password) && 
+          /[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        strength = "Strong";
+        color = "text-success";
+      } else if (password.length >= 6) {
+        strength = "Medium";
+        color = "text-warning";
+      } else if (password.length > 0) {
+        strength = "Weak";
+        color = "text-danger";
+      }
+      
+      setPasswordStrength({ text: strength, color });
+    }
   }
 
   async function handleSubmit(e) {
@@ -40,7 +65,7 @@ const Register = () => {
       if (data.token) {
         // in case there is an old token in the browser, remove it
         localStorage.removeItem("token");
-        userLogInPostFetch(user, URL, navigate)
+        userLogInPostFetch(user, URL, navigate);
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -67,16 +92,22 @@ const Register = () => {
               autoComplete="email"
               required
             />
-            <input
-              className="form-control form-control-lg mb-3"
-              id="password"
-              value={user.password}
-              type="password"
-              placeholder="Password"
-              onChange={handleChange}
-              autoComplete="new-password"
-              required
-            />
+            <div className="mb-3">
+              <input
+                className="form-control form-control-lg mb-1"
+                id="password"
+                value={user.password}
+                type="password"
+                placeholder="Password (8+ characters)"
+                onChange={handleChange}
+                required
+              />
+              {passwordStrength.text && (
+                <div className={`${passwordStrength.color} fs-6`}>
+                  Password strength: {passwordStrength.text}
+                </div>
+              )}
+            </div>
             <input
               className="form-control form-control-lg mb-3"
               id="first_name"
@@ -99,6 +130,7 @@ const Register = () => {
             />
             <button className="btn btn-info btn-lg w-100">Sign Up</button>
           </form>
+          
         </div>
       </div>
     </div>
