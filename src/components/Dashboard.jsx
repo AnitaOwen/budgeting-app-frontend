@@ -44,10 +44,10 @@ const Dashboard = () => {
         <tbody>
           {Array.isArray(transactions) && transactions.map((transaction) => (
             <tr key={transaction.id}>
-            <td>{transaction.item_name}</td>
-            <td>${parseFloat(transaction.amount).toFixed(2)}</td>
-            <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-            <td>{transaction.transaction_type}</td> {/* Added transaction type */}
+              <td>{transaction.item_name}</td>
+              <td>${parseFloat(transaction.amount).toFixed(2)}</td>
+              <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
+              <td>{transaction.transaction_type}</td>
           </tr>
           ))}
         </tbody>
