@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Routes, Route, useNavigate } from "react-router-dom";
 import './App.css'
-import Login from './components/Login';
+import Login from './components/login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import NavBar from './components/NavBar';
