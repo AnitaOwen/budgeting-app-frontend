@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import userLogInWithVerificationToken from "../helpers/userLoginWithVerificationToken";
-
 
 const Register = () => {
   const [user, setUser] = useState({ email: "", password: "", first_name: "", last_name: ""});

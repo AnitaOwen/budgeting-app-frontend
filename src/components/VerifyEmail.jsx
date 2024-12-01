@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import userLogInWithVerificationToken from "../helpers/userLoginWithVerificationToken";
+
 
 const VerifyEmail = () => {
     const [verificationStatus, setVerificationStatus] = useState(null);
@@ -11,38 +11,38 @@ const VerifyEmail = () => {
     const navigate = useNavigate();
     const { token } = useParams();
     
+    console.log("VERIFY EMAIL PARAMS TOKEN", token)
+    if (!token) {
+        setError("Verification token is missing.");
+        setIsLoading(false);
+        navigate("/login");
+        return;
+    }
 
     useEffect(() => {
-        console.log("VERIFY EMAIL PARAMS TOKEN", token)
-        if (!token) {
-            setError("Verification token is missing.");
-            setIsLoading(false);
-            navigate("/login");
-            return;
-        }
-
         const verifyUser = async () => {
             try {
-                  const res = await fetch(`${URL}/api/auth/verify-email/token-check`, {
+                const res = await fetch(`${URL}/api/auth/verify-email/${token}`, {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
-                      "Authorization": `Bearer ${token}` 
                     },
-                  });
+                });
 
                 if (!res.ok) {
                     throw new Error("Verification failed");
                 }
 
                 const data = await res.json();
-                console.log("user data", data.user);
-                console.log("data", data);
 
-                localStorage.setItem("token", data.token);
-
-                setVerificationStatus(data.message);
-                navigate(`/dashboard/${data.user.id}`); 
+                if(data.message && data.token && data.user){
+                    setVerificationStatus(data.message);
+                    localStorage.setItem("token", data.token);
+                    setTimeout(() => navigate(`/dashboard/${data.user.id}`), 5000);
+                }  else {
+                    setVerificationStatus(data.message);
+                    setTimeout(() => navigate("/login"), 5000);
+                }
             } catch (error) {
                 setError(error.message);
             } finally {
