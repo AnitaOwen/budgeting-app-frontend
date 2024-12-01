@@ -17,7 +17,7 @@ const Dashboard = () => {
         }
 
         const data = await response.json();  
-        console.log("data", data)
+        // console.log("data", data)
         setTransactions(data);
 
       } catch (error) {
@@ -30,29 +30,31 @@ const Dashboard = () => {
 
   return (
     <div className="min-vh-100 d-flex p-3 bg-info bg-opacity-25">
+
       <div className="container mt-4">
-      <h2>Your Transactions</h2>
-      <table className="table table-striped">
-        <thead className="thead-dark">
-          <tr>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Date</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(transactions) && transactions.map((transaction) => (
-            <tr key={transaction.id}>
-              <td>{transaction.item_name}</td>
-              <td>${parseFloat(transaction.amount).toFixed(2)}</td>
-              <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-              <td>{transaction.transaction_type}</td>
-          </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        <h2>Your Transactions</h2>
+        <table className="table table-striped">
+          <thead className="thead-dark">
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.length > 0 && transactions.map((transaction) => (
+              <tr key={transaction.id}>
+                <td>{transaction.item_name}</td>
+                <td>${parseFloat(transaction.amount).toFixed(2)}</td>
+                <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
+                <td>{transaction.transaction_type}</td>
+            </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
     </div>
   )
 }

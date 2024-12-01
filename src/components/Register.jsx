@@ -62,11 +62,17 @@ const Register = () => {
 
       const data = await res.json();
 
-      if (data.token) {
-        // in case there is an old token in the browser, remove it
-        localStorage.removeItem("token");
-        userLogInPostFetch(user, URL, navigate);
+      if (data.message) {
+        alert(data.message);
+        // alert("Registration successful! Please check your email to verify your account.");
       }
+      // if (data.token) {
+      //   // in case there is an old token in the browser, remove it
+      //   localStorage.removeItem("token");
+
+
+      //   userLogInPostFetch(user, URL, navigate);
+      // }
     } catch (error) {
       console.error("Error during registration:", error);
     }
