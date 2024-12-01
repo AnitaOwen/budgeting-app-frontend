@@ -13,7 +13,7 @@ async function userLogInPostFetch(user, URL, navigate) {
       const res = await fetch(`${URL}/api/auth/login`, options);
       
       if (!res.ok) {
-        setUser({ email: "", password: "" });
+        // setUser({ email: "", password: "" });
         throw new Error("Login failed");
       }
 
@@ -23,7 +23,7 @@ async function userLogInPostFetch(user, URL, navigate) {
         localStorage.setItem("token", data.token);
 
         navigate(`/dashboard/${data.user.id}`)
-        
+
         console.log("JWT Login Success!")
       } else {
         console.log("JWT Login Failed");

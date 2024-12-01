@@ -15,8 +15,8 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} /> 
       <Route path="/register" element={<Register />} /> 
-      <Route path="/dashboard/:id" element={<Dashboard />} /> 
-      <Route path="/verify-email/:token" element={<VerifyEmail />} />
+      <Route path="/dashboard/:id" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
       {/* <Route path="*" element={<FourOFour />} /> */}
     </Routes>
     </>

@@ -24,7 +24,7 @@ const Login = () => {
   //Demo User Login Function
   async function handleDemoSignIn(e) {
     e.preventDefault();
-    const user = { email: "demo@me.com", password: "password" };
+    const user = { email: "aveniia@gmail.com", password: "password" };
     userLogInPostFetch(user, URL, navigate);
   }
 
