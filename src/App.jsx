@@ -5,6 +5,8 @@ import Login from './components/login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import VerifyEmail from "./components/VerifyEmail";
+import ProtectedRoute from "./components/ProtectedRoute";
+import FourOFour from "./components/FourOFour";
 // import NavBar from './components/NavBar';
 
 function App() {
@@ -17,7 +19,7 @@ function App() {
       <Route path="/register" element={<Register />} /> 
       <Route path="/dashboard/:id" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       <Route path="/verify-email" element={<VerifyEmail />} />
-      {/* <Route path="*" element={<FourOFour />} /> */}
+      <Route path="*" element={<FourOFour />} />
     </Routes>
     </>
   )
