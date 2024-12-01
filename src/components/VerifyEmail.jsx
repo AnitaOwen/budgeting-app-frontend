@@ -1,42 +1,48 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import userLogInWithVerificationToken from "../helpers/userLoginWithVerificationToken";
 
 const VerifyEmail = () => {
-    const { token } = useParams();
-    const URL = import.meta.env.VITE_BASE_URL;
-    
     const [verificationStatus, setVerificationStatus] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true); 
+
+    const URL = import.meta.env.VITE_BASE_URL;
     const navigate = useNavigate();
+    const { token } = useParams();
+    
 
     useEffect(() => {
+        console.log("VERIFY EMAIL PARAMS TOKEN", token)
         if (!token) {
             setError("Verification token is missing.");
             setIsLoading(false);
+            navigate("/login");
             return;
         }
 
         const verifyUser = async () => {
             try {
-                // Send the token to the backend to verify the user
-                const res = await fetch(`${URL}/api/auth/verify-email/${token}`, {
+                  const res = await fetch(`${URL}/api/auth/verify-email/token-check`, {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
+                      "Content-Type": "application/json",
+                      "Authorization": `Bearer ${token}` 
                     },
-                });
+                  });
 
                 if (!res.ok) {
                     throw new Error("Verification failed");
                 }
 
                 const data = await res.json();
-                setVerificationStatus(data.message);
+                console.log("user data", data.user);
+                console.log("data", data);
 
-                setTimeout(() => {
-                    navigate("/login");
-                }, 3000);
+                localStorage.setItem("token", data.token);
+
+                setVerificationStatus(data.message);
+                navigate(`/dashboard/${data.user.id}`); 
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -45,7 +51,7 @@ const VerifyEmail = () => {
         };
 
         verifyUser();
-    }, [token, navigate]);
+    }, [token]);
 
     return (
         <div className="min-vh-100 d-flex align-items-center p-3 bg-info bg-opacity-25">
@@ -55,7 +61,7 @@ const VerifyEmail = () => {
                     {isLoading && <div className="text-center">Verifying...</div>} 
                     {verificationStatus && !isLoading && (
                         <div className="alert alert-success">
-                            {verificationStatus} Redirecting you to the login page...
+                            {verificationStatus} Redirecting you to your dashboard...
                         </div>
                     )}
                     {error && !isLoading && (

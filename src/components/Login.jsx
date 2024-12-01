@@ -4,11 +4,7 @@ import userLogInPostFetch from "../helpers/userLogInPostFetch";
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
-    
-  const URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
-    
-
   
   function handleChange(event) {
     setUser({ ...user, [event.target.id]: event.target.value });
@@ -18,14 +14,14 @@ const Login = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    userLogInPostFetch(user, URL, navigate);
+    userLogInPostFetch(user, navigate);
   }
   
   //Demo User Login Function
   async function handleDemoSignIn(e) {
     e.preventDefault();
     const user = { email: "aveniia@gmail.com", password: "password" };
-    userLogInPostFetch(user, URL, navigate);
+    userLogInPostFetch(user, navigate);
   }
 
   return (

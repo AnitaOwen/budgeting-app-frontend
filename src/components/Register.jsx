@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import userLogInPostFetch from "../helpers/userLogInPostFetch";
+import userLogInWithVerificationToken from "../helpers/userLoginWithVerificationToken";
 
 
 const Register = () => {
-
   const [user, setUser] = useState({ email: "", password: "", first_name: "", last_name: ""});
 
   const [passwordStrength, setPasswordStrength] = useState("");
@@ -66,13 +65,7 @@ const Register = () => {
         alert(data.message);
         // alert("Registration successful! Please check your email to verify your account.");
       }
-      // if (data.token) {
-      //   // in case there is an old token in the browser, remove it
-      //   localStorage.removeItem("token");
 
-
-      //   userLogInPostFetch(user, URL, navigate);
-      // }
     } catch (error) {
       console.error("Error during registration:", error);
     }
