@@ -12,14 +12,14 @@ const VerifyEmail = () => {
     const { token } = useParams();
     
     console.log("VERIFY EMAIL PARAMS TOKEN", token)
-    if (!token) {
-        setError("Verification token is missing.");
-        setIsLoading(false);
-        navigate("/login");
-        return;
-    }
-
+    
     useEffect(() => {
+        if (!token) {
+            setError("Verification token is missing.");
+            setIsLoading(false);
+            navigate("/login");
+            return;
+        }
         const verifyUser = async () => {
             try {
                 const res = await fetch(`${URL}/api/auth/verify-email/${token}`, {

@@ -6,12 +6,20 @@ const Dashboard = () => {
   const { id } = useParams(); 
   const [transactions, setTransactions] = useState([]);
   const URL = import.meta.env.VITE_BASE_URL
-
+  
+  const token = localStorage.getItem("token");
+  if (!token) {
+    navigate("/login");
+  }
   useEffect(() => {
     const fetchTransactions = async () => {
-      try {
-        const response = await fetch(`${URL}/api/transactions/${id}`); 
-
+      try { 
+        const response = await fetch(`${URL}/api/transactions/${id}`, {
+          method: "GET",
+          headers: {
+              "Authorization": `Bearer ${token}`,
+          },
+      });
         if (!response.ok) {
         throw new Error(`error status: ${response.status}`);
         }
