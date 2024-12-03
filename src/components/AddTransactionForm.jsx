@@ -4,13 +4,14 @@ import { useState } from "react";
 const AddTransactionForm = ({id, setTransactions, setShowForm}) => {
   const URL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("token");
-
+  
   const [newTransaction, setNewTransaction] = useState({
     transaction_type: "",
     amount: "",
     category: "",
     transaction_date: "",
   })
+
 
   const handleTextChange = (event) => {
     setNewTransaction({ ...newTransaction, [event.target.id]: event.target.value });

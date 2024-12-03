@@ -2,13 +2,11 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
-  const [user, setUser] = useState({ email: "", password: "", first_name: "", last_name: ""});
-
-  const [passwordStrength, setPasswordStrength] = useState("");
-
   const URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
 
+  const [user, setUser] = useState({ email: "", password: "", first_name: "", last_name: ""});
+  const [passwordStrength, setPasswordStrength] = useState("");
 
   function handleChange(event) {
     setUser({ ...user, [event.target.id]: event.target.value });
@@ -58,7 +56,7 @@ const Register = () => {
       }
 
       const data = await res.json();
-      
+
 
       if (data.message) {
         alert(data.message);

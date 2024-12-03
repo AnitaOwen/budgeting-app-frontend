@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link  } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKey, faTimes } from "@fortawesome/free-solid-svg-icons";
 import AddTransactionForm from './AddTransactionForm';
 import DisposableIncome from './DisposableIncome';
+import UpdatePasswordForm from './UpdatePasswordForm';
 
 
 const Dashboard = () => {
   const { id } = useParams(); 
   const [transactions, setTransactions] = useState([]);
-  const [showForm, setShowForm] = useState(false);
+  const [showTransactionForm, setShowTransactionForm] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
   const URL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -40,9 +44,15 @@ const Dashboard = () => {
     };
 
     fetchTransactions();
-  }, [id]);
+  }, [id, navigate]);
   return (
     <div className="min-vh-100 p-3 bg-info bg-opacity-25">
+      <button className="btn btn-light me-2" type="button" onClick={() => setShowPasswordForm(!showPasswordForm)}  >
+        <FontAwesomeIcon icon={showPasswordForm ? faTimes : faKey} />
+      </button>
+
+      {showPasswordForm && <UpdatePasswordForm id={id} setShowPasswordForm={setShowPasswordForm} />}
+
       {transactions.length > 0 && (<DisposableIncome transactions={transactions}/>)}
       
       <div className="container mt-4">
@@ -72,21 +82,20 @@ const Dashboard = () => {
         <div className="text-center">
           <button
             className="btn btn-info mt-3"
-            onClick={() => setShowForm(!showForm)}
+            onClick={() => setShowTransactionForm(!showTransactionForm)}
           >
-            {showForm ? "Hide Form" : "Add a Transaction"}
+            {showTransactionForm ? "Hide Form" : "Add a Transaction"}
           </button>
-          {showForm && (
+          {showTransactionForm && (
             <AddTransactionForm
               id={id}
               setTransactions={setTransactions}
-              setShowForm={setShowForm}
+              setShowTransactionForm={setShowTransactionForm}
             />
           )}
         </div>
       </div>
     </div>
-    
   )
 }
 
