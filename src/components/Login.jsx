@@ -64,37 +64,39 @@ const Login = () => {
   //   }
   // }
 
-  const handleDemoSignIn = async (e) => {
-    e.preventDefault();
-    const demoUser = { email: "aveniia@gmail.com", password: "password", otp: "" };
-    setLoading(true);
-    setErrorMessage(null);
+  // const handleDemoSignIn = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   setErrorMessage(null);
+  //   const demoUser = { email: "aveniia@gmail.com", password: "password", otp: "" };
 
-    try {
-      const data = await userLogInPostFetch(demoUser);
-      handleLoginResponse(data);
-    } catch (error) {
-      setErrorMessage("Login failed. Please try again.");
-      console.error("Error during demo sign-in:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   try {
+  //     const data = await userLogInPostFetch(demoUser);
+  //     handleLoginResponse(data);
+  //   } catch (error) {
+  //     setErrorMessage("Login failed. Please try again.");
+  //     console.error("Error during demo sign-in:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   
-  // //Demo User Login Function
+  //Demo User Login Function
   // async function handleDemoSignIn(e) {
   //   e.preventDefault();
+  //   setLoading(true);
+  //   setErrorMessage(null);
+    
   //   const demoUser = { email: "aveniia@gmail.com", password: "password", otp: "" };
   //   try {
   //     const data = await userLogInPostFetch(demoUser);
   //     console.log("Login Response:", data);
       
   //     if (data.token) {
+  //       setMfaRequired(false);
   //       localStorage.setItem("token", data.token);
   //       navigate(`/dashboard/${data.user.id}`);
   //       console.log("JWT Login Success!");
-  //     } else if (data.message === "OTP sent to your email. Please check your inbox.") {
-  //       setMfaRequired(true);
   //     } else {
   //       console.log("JWT Login Failed");
   //     }
@@ -126,13 +128,13 @@ const Login = () => {
           <h2 className="text-center mb-4 fs-3">Login</h2>
           <div className="text-center mb-4">
             Don't have an account? <Link to="/register">Register</Link>
-            <br />
-            <button 
+            {/* <br /> */}
+            {/* <button 
               className="btn btn-link text-secondary p-0 mt-2"
               onClick={handleDemoSignIn}
             >
               Try Demo User
-            </button>
+            </button> */}
           </div>
 
           {errorMessage && (
