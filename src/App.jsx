@@ -5,21 +5,19 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import VerifyEmail from "./components/VerifyEmail";
 import ProtectedRoute from "./components/ProtectedRoute";
-import AddTransactionForm from "./components/AddTransactionForm";
 import FourOFour from "./components/FourOFour";
-// import NavBar from './components/NavBar';
+import NavBar from './components/NavBar';
 
 function App() {
 
   return ( 
     <>
-    {/* <NavBar /> */}
+    <NavBar />
     <Routes>
       <Route path="/login" element={<Login />} /> 
       <Route path="/register" element={<Register />} /> 
       {/* <Route element={<ProtectedRoute />}> */}
         <Route path="/dashboard/:id" element={<Dashboard />} />
-        {/* <Route path="/add-transaction/:id" element={<AddTransactionForm />} /> */}
       {/* </Route> */}
       <Route path="/verify-email/:token" element={<VerifyEmail />} />
       <Route path="*" element={<FourOFour />} />
