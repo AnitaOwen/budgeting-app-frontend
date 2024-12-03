@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link  } from 'react-router-dom';
 import AddTransactionForm from './AddTransactionForm';
+import DisposableIncome from './DisposableIncome';
 
 
 const Dashboard = () => {
@@ -41,51 +42,51 @@ const Dashboard = () => {
     fetchTransactions();
   }, [id]);
   return (
-    <div className="min-vh-100 d-flex p-3 bg-info bg-opacity-25">
+    <div className="min-vh-100 p-3 bg-info bg-opacity-25">
+      {transactions.length > 0 && (<DisposableIncome transactions={transactions}/>)}
+      
       <div className="container mt-4">
         <h2>Your Transactions</h2>
-
         {transactions.length === 0 ? (
-          <p>No transactions found.</p>
+          <p>Welcome! Click the button below to begin!</p>
         ) : (
           <table className="table table-striped">
             <thead className="thead-dark">
               <tr>
+                <th>Date</th>
                 <th>Description</th>
                 <th>Amount</th>
-                <th>Date</th>
-                <th>Type</th>
               </tr>
             </thead>
             <tbody>
               {transactions.map((transaction) => (
                 <tr key={transaction.id}>
+                  <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
                   <td>{transaction.item_name}</td>
                   <td>${parseFloat(transaction.amount).toFixed(2)}</td>
-                  <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-                  <td>{transaction.transaction_type}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
-
-        <button
-          className="btn btn-info mt-3"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? "Hide Form" : "Add a Transaction"}
-        </button>
-
-        {showForm && (
-          <AddTransactionForm
-            id={id}
-            setTransactions={setTransactions}
-            setShowForm={setShowForm}
-          />
-        )}
+        <div className="text-center">
+          <button
+            className="btn btn-info mt-3"
+            onClick={() => setShowForm(!showForm)}
+          >
+            {showForm ? "Hide Form" : "Add a Transaction"}
+          </button>
+          {showForm && (
+            <AddTransactionForm
+              id={id}
+              setTransactions={setTransactions}
+              setShowForm={setShowForm}
+            />
+          )}
+        </div>
       </div>
     </div>
+    
   )
 }
 
