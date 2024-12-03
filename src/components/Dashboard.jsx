@@ -51,18 +51,18 @@ const Dashboard = () => {
           <p>Welcome! Click the button below to begin!</p>
         ) : (
           <table className="table table-striped">
-            <thead className="thead-dark">
+            <thead className="thead-dark text-center">
               <tr>
                 <th>Date</th>
-                <th>Description</th>
+                <th>Category</th>
                 <th>Amount</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-center">
               {transactions.map((transaction) => (
                 <tr key={transaction.id}>
                   <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-                  <td>{transaction.item_name}</td>
+                  <td>{transaction.category}</td>
                   <td>${parseFloat(transaction.amount).toFixed(2)}</td>
                 </tr>
               ))}
