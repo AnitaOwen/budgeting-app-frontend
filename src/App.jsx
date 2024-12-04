@@ -1,7 +1,7 @@
 
 import { Routes, Route, useNavigate } from "react-router-dom";
 import './App.css';
-import Login from "./components/login";
+import Login from './components/Login.jsx';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import VerifyEmail from "./components/VerifyEmail";
