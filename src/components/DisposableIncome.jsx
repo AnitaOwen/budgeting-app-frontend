@@ -14,7 +14,7 @@ const DisposableIncome = ({transactions}) => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="mt-4">
       <h4>Disposable Income</h4>
       <p>${calculateDisposableIncome().toFixed(2)}</p>
     </div>

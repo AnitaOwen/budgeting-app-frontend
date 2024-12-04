@@ -46,54 +46,67 @@ const Dashboard = () => {
     fetchTransactions();
   }, [id, navigate]);
   return (
-    <div className="min-vh-100 p-3 bg-info bg-opacity-25">
-      <button className="btn btn-light me-2" type="button" onClick={() => setShowPasswordForm(!showPasswordForm)}  >
-        <FontAwesomeIcon icon={showPasswordForm ? faTimes : faKey} />
-      </button>
+    <div className="p-3 bg-info bg-opacity-25">
+      <div className='d-flex gap-2 py-2'>
+        {!showTransactionForm && (
+          <button className="btn btn-sm btn-info" type="button" onClick={() => setShowPasswordForm(!showPasswordForm)}  >
+            <FontAwesomeIcon icon={showPasswordForm ? faTimes : faKey} />
+          </button>
+        )}
 
+        {!showPasswordForm && (
+          <button
+          className="btn btn-info btn-sm"
+          onClick={() => setShowTransactionForm(!showTransactionForm)}
+          >
+            {showTransactionForm ? "X" : "Add Transaction"}
+          </button>
+        )}
+      </div>
       {showPasswordForm && <UpdatePasswordForm id={id} setShowPasswordForm={setShowPasswordForm} />}
 
-      {transactions.length > 0 && (<DisposableIncome transactions={transactions}/>)}
-      
-      <div className="container mt-4">
-        <h2>Your Transactions</h2>
-        {transactions.length === 0 ? (
-          <p>Welcome! Click the button below to begin!</p>
-        ) : (
-          <table className="table table-striped">
-            <thead className="thead-dark text-center">
-              <tr>
-                <th>Date</th>
-                <th>Category</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody className="text-center">
-              {transactions.map((transaction) => (
-                <tr key={transaction.id}>
-                  <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-                  <td>{transaction.category}</td>
-                  <td>${parseFloat(transaction.amount).toFixed(2)}</td>
+      <div className="mt-4 mb-5">
+        {transactions.length > 0 && !showTransactionForm && !showPasswordForm && (
+          <>
+            {transactions.length > 0 && (<DisposableIncome transactions={transactions}/>)}
+            <h2>Your Transactions</h2>
+            <table className="table table-striped">
+              <thead className="thead-dark text-center">
+                <tr>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Amount</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="text-center">
+                {transactions.map((transaction) => (
+                  <tr key={transaction.id}>
+                    <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
+                    <td>{transaction.category}</td>
+                    <td>${parseFloat(transaction.amount).toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
         )}
-        <div className="text-center">
-          <button
-            className="btn btn-info mt-3"
-            onClick={() => setShowTransactionForm(!showTransactionForm)}
-          >
-            {showTransactionForm ? "Hide Form" : "Add a Transaction"}
-          </button>
-          {showTransactionForm && (
+        {/* <div className="d-grid"> */}
+          {/* {!showPasswordForm && (
+            <button
+              className="btn btn-info btn-sm mt-3 ms-auto"
+              onClick={() => setShowTransactionForm(!showTransactionForm)}
+            >
+              {showTransactionForm ? "X" : "Add Transaction"}
+            </button>
+          )} */}
+          {showTransactionForm && !showPasswordForm && (
             <AddTransactionForm
               id={id}
               setTransactions={setTransactions}
               setShowTransactionForm={setShowTransactionForm}
             />
           )}
-        </div>
+        {/* </div> */}
       </div>
     </div>
   )

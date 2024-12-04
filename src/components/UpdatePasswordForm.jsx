@@ -86,7 +86,6 @@ const UpdatePasswordForm = ({id, setShowPasswordForm}) => {
                     confirmPassword: "",
                 })
                 setMessage("Password updated successfully!"); 
-                setShowPasswordForm(false);
                 // navigate(`/dashboard/${data.id}`)
                 
             }  
@@ -95,11 +94,12 @@ const UpdatePasswordForm = ({id, setShowPasswordForm}) => {
             console.log("Failed to update password. Please try again.");
         } finally {
             setLoading(false);
+            setShowPasswordForm(false);
         }
     };
     
     return (
-        <div className="container d-flex justify-content-center">
+        <div className="container d-flex justify-content-center mb-5">
             <form
                 className="card p-4 shadow-sm"
                 style={{ maxWidth: "500px", width: "100%" }}

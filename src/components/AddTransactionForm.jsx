@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const AddTransactionForm = ({id, setTransactions, setShowForm}) => {
+const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
   const URL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("token");
   
@@ -48,13 +48,13 @@ const AddTransactionForm = ({id, setTransactions, setShowForm}) => {
         category: "",
         transaction_date: "",
       })
-      setShowForm(false); 
+      setShowTransactionForm(false); 
     } catch (error) {
       console.error("Error adding transaction:", error);
     }
   }
   return (
-    <div className="mt-5 text-center container-sm">
+    <div className="mt-4 text-center container-sm">
       <h4 className="mb-5">Add a new transaction</h4>
       <form onSubmit={handleSubmit} className="row justify-content-center">
         <div className="col-lg-6 col-md-8 col-sm-10">
@@ -73,7 +73,7 @@ const AddTransactionForm = ({id, setTransactions, setShowForm}) => {
               <option value="expense">Expense</option>
             </select>
           </div>
-          <div>
+          <div className="mb-3">
             <label htmlFor="category" className="form-label">Category</label>
             <select 
               className="form-control"
@@ -102,7 +102,7 @@ const AddTransactionForm = ({id, setTransactions, setShowForm}) => {
               <option value="Miscellaneous">Miscellaneous</option>
             </select>
           </div>
-          <div>
+          <div className="mb-3">
             <label htmlFor="amount" className="form-label">Amount</label>
             <input 
               className="form-control"
@@ -114,7 +114,7 @@ const AddTransactionForm = ({id, setTransactions, setShowForm}) => {
               required
             />
           </div>
-          <div>
+          <div className="mb-3">
             <label htmlFor="transaction_date" className="form-label">Date of Transaction</label>
             <input 
               className="form-control"
@@ -126,10 +126,10 @@ const AddTransactionForm = ({id, setTransactions, setShowForm}) => {
             />
           </div>
         </div>
-        <div>
+        <div className="mb-3">
           <button 
           type="submit" 
-          className="btn btn-info btn-sm mb-3 mt-4">
+          className="btn btn-info mb-3 mt-4">
             Submit</button>
         </div>
       </form>
