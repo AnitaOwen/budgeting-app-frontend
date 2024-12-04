@@ -11,8 +11,6 @@ const VerifyEmail = () => {
     const navigate = useNavigate();
     const { token } = useParams();
     
-    console.log("VERIFY EMAIL PARAMS TOKEN", token)
-    
     useEffect(() => {
         if (!token) {
             setError("Verification token is missing.");
@@ -38,6 +36,7 @@ const VerifyEmail = () => {
                 if(data.message && data.token && data.user){
                     setVerificationStatus(data.message);
                     localStorage.setItem("token", data.token);
+                    localStorage.setItem("userId", data.user.id);
                     setTimeout(() => navigate(`/dashboard/${data.user.id}`), 5000);
                 }  else {
                     setVerificationStatus(data.message);

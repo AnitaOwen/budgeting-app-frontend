@@ -1,13 +1,14 @@
-
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import './App.css';
-import Login from './components/Login.jsx';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import VerifyEmail from "./components/VerifyEmail";
 // import ProtectedRoute from "./components/ProtectedRoute";
 import FourOFour from "./components/FourOFour";
 import NavBar from './components/NavBar';
+import Home from "./components/Home.jsx";
+import Login from "./components/Login";
+
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
     <>
     <NavBar />
     <Routes>
-      <Route path="/login" element={<Login />} /> 
+      <Route path="/" element={<Home/>}/>
+      <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register />} /> 
       {/* <Route element={<ProtectedRoute />}> */}
         <Route path="/dashboard/:id" element={<Dashboard />} />

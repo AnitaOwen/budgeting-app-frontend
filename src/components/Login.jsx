@@ -14,22 +14,6 @@ const Login = () => {
     setUser({ ...user, [event.target.id]: event.target.value });
   }
 
-  // const handleLoginResponse = (data) => {
-  //   if (data && data.message) {
-  //     data.message === "OTP sent to your email. Please check your inbox.";
-  //   }
-  //   if (data && data.token) {
-  //     localStorage.setItem("token", data.token);
-  //     navigate(`/dashboard/${data.user.id}`);
-  //     console.log("JWT Login Success!");
-  //   } else if (data && data.message === "OTP sent to your email. Please check your inbox.") {
-  //     setMfaRequired(true);
-  //   } else {
-  //     setErrorMessage(data?.message);
-  //     console.log("Login Failed");
-  //   }
-  // };
-
   const handleLoginResponse = async (data) => {
     try {
       if (data) {
@@ -47,6 +31,7 @@ const Login = () => {
         }
         if (data.token) {
           localStorage.setItem("token", data.token);
+          localStorage.setItem("userId", data.user.id); 
           console.log("Login Success!");
           setMessage("Login Success!");
           navigate(`/dashboard/${data.user.id}`);

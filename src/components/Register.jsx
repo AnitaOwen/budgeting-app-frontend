@@ -41,9 +41,9 @@ const Register = () => {
     const options = {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-
       body: JSON.stringify(user),
     };
 
@@ -56,13 +56,10 @@ const Register = () => {
       }
 
       const data = await res.json();
-
-
+      
       if (data.message) {
         alert(data.message);
-        // alert("Registration successful! Please check your email to verify your account.");
       }
-
     } catch (error) {
       console.error("Error during registration:", error);
     }
