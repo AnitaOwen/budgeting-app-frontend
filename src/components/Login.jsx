@@ -14,11 +14,14 @@ const Login = () => {
   }
 
   const handleLoginResponse = (data) => {
-    if (data?.token) {
+    if (data && data.message) {
+      data.message === "OTP sent to your email. Please check your inbox.";
+  }
+    if (data && data.token) {
       localStorage.setItem("token", data.token);
       navigate(`/dashboard/${data.user.id}`);
       console.log("JWT Login Success!");
-    } else if (data?.message === "OTP sent to your email. Please check your inbox.") {
+    } else if (data && data.message === "OTP sent to your email. Please check your inbox.") {
       setMfaRequired(true);
     } else {
       setErrorMessage(data?.message);
