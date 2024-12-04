@@ -10,7 +10,9 @@ But that’s not all – gain actionable insights into your budget with detailed
 
 Take charge of your financial future today!
 
+- [budgeting-app-frontend Github Repo](https://github.com/AnitaOwen/budgeting-app-frontend)
 - [Deployed Netlify Link](https://clinquant-rolypoly-ea3737.netlify.app/login)
+- [budgeting-app-backend Github Repo](https://github.com/AnitaOwen/budgeting-app-backend)
 - [Deployed Render Link](https://budgeting-app-backend-bgr1.onrender.com)
 
 ## Getting Started

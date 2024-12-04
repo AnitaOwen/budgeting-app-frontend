@@ -142,12 +142,14 @@ const Dashboard = () => {
           </>
         )}
         {transactions.length > 0 && !showTransactionForm && !showPasswordForm && (
-          <>
-            {transactions.length > 0 && (<DisposableIncome transactions={transactions}/>)}
+          <div className="text-center">
+            {transactions.length > 0 && (
+              <DisposableIncome transactions={transactions}/>
+            )}
             <h2>Your Transactions</h2>
 
-            <table className="table table-striped">
-              <thead className="thead-dark text-center">
+            <table className="table table-striped table-bordered">
+              <thead className="thead-dark">
                 <tr>
                   <th></th>
                   <th>Date</th>
@@ -156,7 +158,7 @@ const Dashboard = () => {
                   <th></th>
                 </tr>
               </thead>
-                <tbody className="text-center">
+                <tbody>
                   {transactions.map((transaction) => (
                     <tr key={transaction.id}>
                       <td>
@@ -181,7 +183,7 @@ const Dashboard = () => {
                         )}
                       </td>
                       <td>
-                        {editableTransaction === transaction.id ? (
+                        {/* {editableTransaction === transaction.id ? (
                           <input
                             type="text"
                             name="category"
@@ -189,9 +191,9 @@ const Dashboard = () => {
                             onChange={handleEditChange}
                             className="form-control"
                           />
-                        ) : (
-                          transaction.category
-                        )}
+                        ) : ( */}
+                          {transaction.category}
+                        {/* )} */}
                       </td>
                       <td>
                         {editableTransaction === transaction.id ? (
@@ -209,7 +211,7 @@ const Dashboard = () => {
                       <td>
                         {editableTransaction === transaction.id ? (
                           <button
-                            className="btn btn-sm btn-light"
+                            className="btn btn-sm btn-info"
                             onClick={() => handleEditSubmit(transaction.id)}
                           >
                             <FontAwesomeIcon icon={faCheck} />
@@ -227,7 +229,7 @@ const Dashboard = () => {
                   ))}
                 </tbody>
             </table>
-          </>
+          </div>
         )}
         {showTransactionForm && !showPasswordForm && (
           <AddTransactionForm

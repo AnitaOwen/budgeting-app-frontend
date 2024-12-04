@@ -20,7 +20,7 @@ const DisposableIncome = ({transactions}) => {
   }, [transactions]);
   
   return (
-    <div className="mt-4">
+    <div className="card p-4 my-4 mx-2">
       <h4>Disposable Income</h4>
       <p>${disposableIncome.toFixed(2)}</p>
     </div>
