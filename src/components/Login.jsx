@@ -45,69 +45,6 @@ const Login = () => {
     }
   };
 
-  // Login Function
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   try {
-  //     const data = await userLogInPostFetch(demoUser);
-  //     console.log("Login Response:", data);
-      
-  //     if (data.token) {
-  //       localStorage.setItem("token", data.token);
-  //       navigate(`/dashboard/${data.user.id}`);
-  //       console.log("JWT Login Success!");
-  //     } else if (data.message === "OTP sent to your email. Please check your inbox.") {
-  //       setMfaRequired(true);
-  //     } else {
-  //       console.log("JWT Login Failed");
-  //     }
-  //   } catch (error) {
-  //     console.error("Login failed:", error); 
-  //   }
-  // }
-
-  // const handleDemoSignIn = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   setErrorMessage(null);
-  //   const demoUser = { email: "aveniia@gmail.com", password: "password", otp: "" };
-
-  //   try {
-  //     const data = await userLogInPostFetch(demoUser);
-  //     handleLoginResponse(data);
-  //   } catch (error) {
-  //     setErrorMessage("Login failed. Please try again.");
-  //     console.error("Error during demo sign-in:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  
-  //Demo User Login Function
-  // async function handleDemoSignIn(e) {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   setErrorMessage(null);
-    
-  //   const demoUser = { email: "aveniia@gmail.com", password: "password", otp: "" };
-  //   try {
-  //     const data = await userLogInPostFetch(demoUser);
-  //     console.log("Login Response:", data);
-      
-  //     if (data.token) {
-  //       setMfaRequired(false);
-  //       localStorage.setItem("token", data.token);
-  //       navigate(`/dashboard/${data.user.id}`);
-  //       console.log("JWT Login Success!");
-  //     } else {
-  //       console.log("JWT Login Failed");
-  //     }
-  //   } catch (error) {
-  //     console.error("Login failed:", error); 
-  //   }
-  // }
-
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

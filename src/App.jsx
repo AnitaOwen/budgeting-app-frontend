@@ -1,14 +1,13 @@
 
 import { Routes, Route, useNavigate } from "react-router-dom";
-import './App.css'
-import Login from './components/login';
+import './App.css';
+import Login from "./components/Login.jsx";
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import VerifyEmail from "./components/VerifyEmail";
-import ProtectedRoute from "./components/ProtectedRoute";
+// import ProtectedRoute from "./components/ProtectedRoute";
 import FourOFour from "./components/FourOFour";
 import NavBar from './components/NavBar';
-// import UpdatePasswordForm from "./components/UpdatePasswordForm";
 
 function App() {
 
@@ -20,8 +19,6 @@ function App() {
       <Route path="/register" element={<Register />} /> 
       {/* <Route element={<ProtectedRoute />}> */}
         <Route path="/dashboard/:id" element={<Dashboard />} />
-        {/* <Route path="/change-password/:id" element={<UpdatePasswordForm />} /> */}
-      {/* </Route> */}
       <Route path="/verify-email/:token" element={<VerifyEmail />} />
       <Route path="*" element={<FourOFour />} />
     </Routes>
