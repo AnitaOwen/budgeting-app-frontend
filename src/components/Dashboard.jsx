@@ -60,7 +60,6 @@ const Dashboard = () => {
         }
 
         const data = await response.json();
-        console.log("Fetched Transactions Data:", data);
         setTransactions(data || []);
       } catch (error) {
         console.error("Error fetching transactions:", error);
@@ -69,6 +68,7 @@ const Dashboard = () => {
 
     fetchTransactions();
   }, [id, navigate]);
+
   return (
     <div className="p-3 bg-info bg-opacity-25">
       <div className='d-flex gap-2 py-2'>
@@ -90,6 +90,15 @@ const Dashboard = () => {
       {showPasswordForm && <UpdatePasswordForm id={id} setShowPasswordForm={setShowPasswordForm} />}
 
       <div className="mt-4 mb-5">
+        {transactions.length === 0 && (
+          <>
+          <h2>Your Transactions</h2>
+          <div className="my-4 alert fs-8 alert-light text-center">
+            <p>You haven't made any transactions yet.</p>
+            <p>Start adding transactions to track your spending.</p>
+          </div>
+          </>
+        )}
         {transactions.length > 0 && !showTransactionForm && !showPasswordForm && (
           <>
             {transactions.length > 0 && (<DisposableIncome transactions={transactions}/>)}
@@ -137,7 +146,7 @@ const Dashboard = () => {
             id={id}
             setTransactions={setTransactions}
             setShowTransactionForm={setShowTransactionForm}
-            />
+          />
         )}
       </div>
     </div>

@@ -6,14 +6,14 @@ const deleteTransaction = async (transaction_id) => {
             alert("You must be logged in to delete transactions.");
             navigate("/login");
             return;
-          }
+        }
         const response = await fetch(`/api/transactions/${transaction_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json', 
                 Authorization: `Bearer ${token}`,
             },
-         });
+        });
   
         if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`); 

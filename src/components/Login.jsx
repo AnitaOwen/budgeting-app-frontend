@@ -5,6 +5,7 @@ import userLogInPostFetch from "../helpers/userLogInPostFetch";
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "", otp: ""});
   const [mfaRequired, setMfaRequired] = useState(false);
+  const [message, setMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -13,32 +14,61 @@ const Login = () => {
     setUser({ ...user, [event.target.id]: event.target.value });
   }
 
-  const handleLoginResponse = (data) => {
-    if (data && data.message) {
-      data.message === "OTP sent to your email. Please check your inbox.";
-  }
-    if (data && data.token) {
-      localStorage.setItem("token", data.token);
-      navigate(`/dashboard/${data.user.id}`);
-      console.log("JWT Login Success!");
-    } else if (data && data.message === "OTP sent to your email. Please check your inbox.") {
-      setMfaRequired(true);
-    } else {
-      setErrorMessage(data?.message);
-      console.log("Login Failed");
+  // const handleLoginResponse = (data) => {
+  //   if (data && data.message) {
+  //     data.message === "OTP sent to your email. Please check your inbox.";
+  //   }
+  //   if (data && data.token) {
+  //     localStorage.setItem("token", data.token);
+  //     navigate(`/dashboard/${data.user.id}`);
+  //     console.log("JWT Login Success!");
+  //   } else if (data && data.message === "OTP sent to your email. Please check your inbox.") {
+  //     setMfaRequired(true);
+  //   } else {
+  //     setErrorMessage(data?.message);
+  //     console.log("Login Failed");
+  //   }
+  // };
+
+  const handleLoginResponse = async (data) => {
+    try {
+      if (data) {
+        if (data.message === "OTP sent to your email. Please check your inbox.") {
+          setMfaRequired(true);
+          setMessage(data.message);
+        } 
+        if (data.message === "Invalid or expired OTP.") {
+          setErrorMessage("Invalid or expired OTP.");
+          throw new Error("Invalid or expired OTP. Please Try Again.");
+        }
+        if (data.message === "Invalid credentials") {
+          setErrorMessage("Incorrect username or password.");
+          throw new Error("Invalid credentials");
+        }
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          console.log("Login Success!");
+          setMessage("Login Success!");
+          navigate(`/dashboard/${data.user.id}`);
+        }
+      }
+    } catch (error) {
+      console.error(error.message);
+      setErrorMessage(error.message); 
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrorMessage(null);
+    setMessage(null);
+    setErrorMessage(null)
 
     try {
       const data = await userLogInPostFetch(user);
-      handleLoginResponse(data);
+      await handleLoginResponse(data);
     } catch (error) {
-      setErrorMessage("Login failed. Please try again.");
+      setErrorMessage(error.message);
       console.error("Error during login:", error);
     } finally {
       setLoading(false);
@@ -48,11 +78,12 @@ const Login = () => {
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrorMessage(null);
+    setMessage(null);
+    setErrorMessage(null)
 
     try {
       const data = await userLogInPostFetch({ ...user, otp: user.otp });
-      handleLoginResponse(data);
+      await handleLoginResponse(data);
     } catch (error) {
       setErrorMessage("OTP verification failed. Please try again.");
       console.error("Error during OTP verification:", error);
@@ -68,18 +99,16 @@ const Login = () => {
           <h2 className="text-center mb-4 fs-3">Login</h2>
           <div className="text-center mb-4">
             Don't have an account? <Link to="/register">Register</Link>
-            {/* <br /> */}
-            {/* <button 
-              className="btn btn-link text-secondary p-0 mt-2"
-              onClick={handleDemoSignIn}
-            >
-              Try Demo User
-            </button> */}
           </div>
 
           {errorMessage && (
             <div className="alert alert-danger" role="alert">
               {errorMessage}
+            </div>
+          )}
+          {message && (
+            <div className="alert alert-success" role="alert">
+              {message}
             </div>
           )}
 

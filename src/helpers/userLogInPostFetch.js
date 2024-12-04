@@ -1,7 +1,6 @@
 
 
 const userLogInPostFetch = async (user) => {
-
   const URL = import.meta.env.VITE_BASE_URL;
 
   const options = {
@@ -9,7 +8,6 @@ const userLogInPostFetch = async (user) => {
     headers: {
       "Content-Type": "application/json",
     },
-
     body: JSON.stringify(user),
   };
   
@@ -17,13 +15,22 @@ const userLogInPostFetch = async (user) => {
     const res = await fetch(`${URL}/api/auth/login`, options);
       
     if (!res.ok) {
-      throw new Error("Login failed");
+      if (res.status === 401) {
+        throw new Error("Incorrect email or password. \n Please try again");
+      }
+      if (res.status === 401) {
+        throw new Error("Incorrect username or password. \n Please try again");
+      }
+      if (res.status === 400) {
+        throw new Error("Email not verified. \n Please verify your email first.");
+      }
     }
 
     const data = await res.json();
     return data
   } catch (error) {
-    console.error("Error during login:", error);
+    console.error(error);
+    throw error;
   }
 }
 
