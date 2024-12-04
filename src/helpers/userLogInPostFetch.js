@@ -1,6 +1,6 @@
 
 
-async function userLogInPostFetch(user) {
+const userLogInPostFetch = async (user) => {
 
   const URL = import.meta.env.VITE_BASE_URL;
 
