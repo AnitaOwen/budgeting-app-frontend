@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faKey, faTimes, faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faKey, faTimes, faEdit, faCheck } from "@fortawesome/free-solid-svg-icons";
 import AddTransactionForm from './AddTransactionForm';
 import DisposableIncome from './DisposableIncome';
 import UpdatePasswordForm from './UpdatePasswordForm';
@@ -9,14 +9,56 @@ import deleteTransaction from '../helpers/deleteTransaction';
 
 
 const Dashboard = () => {
-  const [transactions, setTransactions] = useState([]);
-  const [showTransactionForm, setShowTransactionForm] = useState(false);
-  const [showPasswordForm, setShowPasswordForm] = useState(false);
-  
   const URL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("token");
   const { id } = useParams(); 
   const navigate = useNavigate();
+
+  const [transactions, setTransactions] = useState([]);
+  const [showTransactionForm, setShowTransactionForm] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [editableTransaction, setEditableTransaction] = useState(null); 
+  const [updatedTransaction, setUpdatedTransaction] = useState({});
+  
+  const handleEditClick = (transaction) => {
+    setEditableTransaction(transaction.id);
+    setUpdatedTransaction({
+      ...transaction,
+      transaction_date: new Date(transaction.transaction_date).toISOString().split('T')[0]
+    });
+  };
+
+  const handleEditChange = (event) => {
+    setUpdatedTransaction({
+      ...updatedTransaction,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleEditSubmit = async (event) => {
+    try {
+      const response = await fetch(`${URL}/api/transactions`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedTransaction),
+      });
+
+      console.log("PUT response", response)
+
+      if (!response.ok) {
+        throw new Error('Failed to update transaction');
+      }
+
+      const updatedTransactionsList = await response.json();
+      setEditableTransaction(null); 
+      setTransactions(updatedTransactionsList)
+    } catch (error) {
+      console.error('Error updating transaction:', error);
+    }
+  };
 
   const handleDelete = async (transactionId) => {
     if (!token) {
@@ -103,41 +145,87 @@ const Dashboard = () => {
           <>
             {transactions.length > 0 && (<DisposableIncome transactions={transactions}/>)}
             <h2>Your Transactions</h2>
+
             <table className="table table-striped">
               <thead className="thead-dark text-center">
                 <tr>
-                  <th></th> 
+                  <th></th>
                   <th>Date</th>
                   <th>Category</th>
                   <th>Amount</th>
                   <th></th>
                 </tr>
               </thead>
-              <tbody className="text-center">
-                {transactions.map((transaction) => (
-                  <tr key={transaction.id}>
-                    <td>
-                      <button 
-                      className="btn btn-sm btn-light"
-                      onClick={() => handleDelete(transaction.id)}
-                      >
-                        <FontAwesomeIcon icon={faTimes} />
-                      </button>
-                    </td>
-                    <td>{new Date(transaction.transaction_date).toLocaleDateString()}</td>
-                    <td>{transaction.category}</td>
-                    <td>${parseFloat(transaction.amount).toFixed(2)}</td>
-                    <td>
-                      <button 
-                        className="btn btn-sm btn-btn-light"
-                        onClick={() => handleEdit(transaction)}
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+                <tbody className="text-center">
+                  {transactions.map((transaction) => (
+                    <tr key={transaction.id}>
+                      <td>
+                        <button
+                          className="btn btn-sm btn-light"
+                          onClick={() => handleDelete(transaction.id)}
+                        >
+                          <FontAwesomeIcon icon={faTimes} />
+                        </button>
+                      </td>
+                      <td>
+                        {editableTransaction === transaction.id ? (
+                          <input
+                            type="date"
+                            name="transaction_date"
+                            value={updatedTransaction.transaction_date}
+                            onChange={handleEditChange}
+                            className="form-control"
+                          />
+                        ) : (
+                          new Date(transaction.transaction_date).toLocaleDateString()
+                        )}
+                      </td>
+                      <td>
+                        {editableTransaction === transaction.id ? (
+                          <input
+                            type="text"
+                            name="category"
+                            value={updatedTransaction.category}
+                            onChange={handleEditChange}
+                            className="form-control"
+                          />
+                        ) : (
+                          transaction.category
+                        )}
+                      </td>
+                      <td>
+                        {editableTransaction === transaction.id ? (
+                          <input
+                            type="text"
+                            name="amount"
+                            value={updatedTransaction.amount}
+                            onChange={handleEditChange}
+                            className="form-control"
+                          />
+                        ) : (
+                          `$${parseFloat(transaction.amount).toFixed(2)}`
+                        )}
+                      </td>
+                      <td>
+                        {editableTransaction === transaction.id ? (
+                          <button
+                            className="btn btn-sm btn-light"
+                            onClick={() => handleEditSubmit(transaction.id)}
+                          >
+                            <FontAwesomeIcon icon={faCheck} />
+                          </button>
+                        ) : (
+                          <button
+                            className="btn btn-sm btn-light"
+                            onClick={() => handleEditClick(transaction)}
+                          >
+                            <FontAwesomeIcon icon={faEdit} />
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
             </table>
           </>
         )}

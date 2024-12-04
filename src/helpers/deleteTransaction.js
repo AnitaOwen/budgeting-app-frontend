@@ -1,5 +1,6 @@
-const deleteTransaction = async (transaction_id) => {
+const deleteTransaction = async (transactionId) => {
     const token = localStorage.getItem("token");
+    const URL = import.meta.env.VITE_BASE_URL;
 
     try {
         if (!token) {
@@ -7,10 +8,10 @@ const deleteTransaction = async (transaction_id) => {
             navigate("/login");
             return;
         }
-        const response = await fetch(`/api/transactions/${transaction_id}`, {
+        const response = await fetch(`${URL}/api/transactions/${transactionId}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json', 
+            headers: { 
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
         });
