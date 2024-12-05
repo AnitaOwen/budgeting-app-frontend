@@ -10,7 +10,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   
-  function handleChange(event) {
+  const handleChange = (event) => {
     setUser({ ...user, [event.target.id]: event.target.value });
   }
 
@@ -76,6 +76,39 @@ const Login = () => {
     }
   };
 
+  const handleDemoSignIn = async (event)  => {
+    event.preventDefault()
+    const URL = import.meta.env.VITE_BASE_URL;
+  
+    const options = {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        }
+    };
+  
+    setLoading(true);
+    setErrorMessage(null);
+    try {
+      const response = await fetch(`${URL}/api/auth/login/demo-user`, options);
+      const data = await response.json();
+  
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user.id)
+        navigate(`/dashboard/${data.user.id}`);
+      } else {
+        setErrorMessage("Demo login failed.");
+      }
+    } catch (error) {
+      console.error("Error during demo login:", error);
+      setErrorMessage("An error occurred during demo login.");
+    } finally {
+      setLoading(false);
+    }
+  }
+  
+
   return (
     <div className="min-vh-100 d-flex align-items-center p-3 bg-info bg-opacity-25">
       <div className="card shadow-sm mx-auto" style={{ width: "100%", maxWidth: "400px" }}>
@@ -83,6 +116,11 @@ const Login = () => {
           <h2 className="text-center mb-4 fs-3">Login</h2>
           <div className="text-center mb-4">
             Don't have an account? <Link to="/register">Register</Link>
+          </div>
+          <div className="text-center mb-4">
+            <button className="btn btn-link p-0 mt-2" onClick={handleDemoSignIn}>
+              Try Demo User
+            </button>
           </div>
 
           {errorMessage && (
