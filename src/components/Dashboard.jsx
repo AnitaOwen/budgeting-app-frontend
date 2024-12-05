@@ -205,7 +205,9 @@ const Dashboard = () => {
                             className="form-control"
                           />
                         ) : (
-                          `$${parseFloat(transaction.amount).toFixed(2)}`
+                          <span className={transaction.transaction_type === "income" ? "text-danger" : "text-success"}>
+                            ${parseFloat(transaction.amount).toFixed(2)}
+                          </span>
                         )}
                       </td>
                       <td>

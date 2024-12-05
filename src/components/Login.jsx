@@ -32,7 +32,6 @@ const Login = () => {
         if (data.token) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("userId", data.user.id); 
-          console.log("Login Success!");
           setMessage("Login Success!");
           navigate(`/dashboard/${data.user.id}`);
         }
