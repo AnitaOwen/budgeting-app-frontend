@@ -7,7 +7,6 @@ import DisposableIncome from './DisposableIncome';
 import UpdatePasswordForm from './UpdatePasswordForm';
 import deleteTransaction from '../helpers/deleteTransaction';
 
-
 const Dashboard = () => {
   const URL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("token");
@@ -19,7 +18,7 @@ const Dashboard = () => {
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [editableTransaction, setEditableTransaction] = useState(null); 
   const [updatedTransaction, setUpdatedTransaction] = useState({});
-  
+
   const handleEditClick = (transaction) => {
     setEditableTransaction(transaction.id);
     setUpdatedTransaction({
