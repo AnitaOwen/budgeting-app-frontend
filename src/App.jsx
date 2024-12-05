@@ -7,7 +7,7 @@ import VerifyEmail from "./components/VerifyEmail";
 import FourOFour from "./components/FourOFour";
 import NavBar from './components/NavBar';
 import Home from "./components/Home.jsx";
-import Login from "./components/Login";
+import Login from "./components/Login.jsx";
 
 
 function App() {
