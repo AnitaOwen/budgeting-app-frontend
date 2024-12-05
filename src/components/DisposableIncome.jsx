@@ -79,14 +79,14 @@ const DisposableIncome = ({transactions}) => {
   
   return (
     <div className="card p-4 my-4 mx-2 d-flex">
-      {/* <h4>Disposable Income</h4>
-      <p>${disposableIncome.toFixed(2)}</p> */}
-      <div className="chart-container" style={{ width: '300px', height: '300px' }}>
+      <h4>Disposable Income</h4>
+      <p>${disposableIncome.toFixed(2)}</p>
+      {/* <div className="chart-container" style={{ width: '300px', height: '300px' }}>
         <DoughnutChart data={chartData} />
       </div>
       <div className="chart-container" style={{ width: '300px', height: '300px' }}>
         <DoughnutChart data={expenseChartData} />
-      </div>
+      </div> */}
     </div>
   )
 }
