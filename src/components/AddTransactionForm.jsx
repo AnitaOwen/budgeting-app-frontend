@@ -83,23 +83,25 @@ const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
               onChange={handleTextChange}
               required
             >
-              <option value="" disabled>Select Category</option>
-              <option value="Salary/Income">Salary</option>
-              <option value="Transportation">Transportation</option>
+              <option value="" disabled>Expense Categories</option>
+              <option value="Housing">Housing</option>
               <option value="Utilities">Utilities</option>
-              <option value="Rent/Mortgage">Rent/Mortgage</option>
-              <option value="Groceries">Groceries</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Food & Dining">Food & Dining</option>
+              <option value="Health & Wellness">Health & Wellness</option>
+              <option value="Shopping">Shopping</option>
               <option value="Entertainment">Entertainment</option>
-              <option value="Healthcare">Healthcare</option>
-              <option value="Insurance">Insurance</option>
-              <option value="Debt Repayment">Debt Repayment</option>
-              <option value="Savings">Savings</option>
-              <option value="Gifts/Donations">Gifts/Donations</option>
-              <option value="Dining Out">Dining Out</option>
-              <option value="Education">Education</option>
-              <option value="Investment">Investment</option>
               <option value="Childcare">Childcare</option>
-              <option value="Miscellaneous">Miscellaneous</option>
+              <option value="Travel">Insurance</option>
+              <option value="Debt Repayment">Debt Repayment</option>
+              <option value="Pets">Pets</option>
+              <option value="Other Expense">Other Expense</option>
+              <option value="" disabled>Income Categories</option>
+              <option value="Salary & Wages">Salary & Wages</option>
+              <option value="Investments">Investments</option>
+              <option value="Business Income">Business Income</option>
+              <option value="Government Benefits">Government Benefits</option>
+              <option value="Other Income">Other Income</option>
             </select>
           </div>
           <div className="mb-3">
