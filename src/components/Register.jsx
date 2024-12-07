@@ -51,11 +51,6 @@ const Register = () => {
     try {
       const res = await fetch(`${URL}/api/auth/register`, options);
 
-      if (!res.ok) {
-        setUser({ email: "", password: "" });
-        throw new Error("Registration failed");
-      }
-
       const data = await res.json();
 
       if (data.message) {
