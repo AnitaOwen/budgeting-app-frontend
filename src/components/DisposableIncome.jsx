@@ -8,6 +8,9 @@ const DisposableIncome = ({transactions}) => {
   const [expenseCategories, setExpenseCategories] = useState([]);
   const [expenseCategoriesValues, setExpenseCategoriesValues] = useState([]);
 
+  const today = new Date()
+  const monthName = today.toLocaleString('default', { month: 'long' });
+
 
   useEffect(() => {
 
@@ -85,7 +88,8 @@ const DisposableIncome = ({transactions}) => {
 
   return (
     <div className="card p-4 my-4 mx-2 justify-content-center d-flex">
-      <div className="chart-container" style={{ width: '35%', height: '35%' }}>
+      <div style={{ width: '400px', height: '450px'}}>
+        <h4>{monthName} Income and Expenses</h4>
         <DoughnutChart data={expenseChartData} />
       </div>
     </div>

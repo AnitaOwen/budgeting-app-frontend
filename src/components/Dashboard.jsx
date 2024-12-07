@@ -19,8 +19,8 @@ const Dashboard = () => {
   const [editableTransaction, setEditableTransaction] = useState(null); 
   const [updatedTransaction, setUpdatedTransaction] = useState({});
   
-  const today = new Date()
-  const monthName = today.toLocaleString('default', { month: 'long' });
+  // const today = new Date()
+  // const monthName = today.toLocaleString('default', { month: 'long' });
   
   const handleEditClick = (transaction) => {
     setEditableTransaction(transaction.id);
@@ -146,10 +146,10 @@ const Dashboard = () => {
           </>
         )}
         {transactions.length > 0 && !showTransactionForm && !showPasswordForm && (
-          <div className="text-center">
+          <div className='container text-center'>
             {transactions.length > 0 && (
               <div>
-                <h4>{monthName} Income and Expenses</h4>
+                {/* <h4 className='text-start'>{monthName} Income and Expenses</h4> */}
                 <DisposableIncome transactions={transactions}/>
               </div>
             )}
