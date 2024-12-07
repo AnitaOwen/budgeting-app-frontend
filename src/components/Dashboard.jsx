@@ -12,13 +12,16 @@ const Dashboard = () => {
   const token = localStorage.getItem("token");
   const { id } = useParams(); 
   const navigate = useNavigate();
-
+  
   const [transactions, setTransactions] = useState([]);
   const [showTransactionForm, setShowTransactionForm] = useState(false);
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [editableTransaction, setEditableTransaction] = useState(null); 
   const [updatedTransaction, setUpdatedTransaction] = useState({});
-
+  
+  const today = new Date()
+  const monthName = today.toLocaleString('default', { month: 'long' });
+  
   const handleEditClick = (transaction) => {
     setEditableTransaction(transaction.id);
     setUpdatedTransaction({
@@ -71,7 +74,9 @@ const Dashboard = () => {
         if(!deletedTransaction.id){
           throw new Error("There was an issue deleting the transaction.")
         }
+
         console.log(`Transaction ${transactionId} deleted successfully.`);
+
         setTransactions(transactions.filter((transaction) => transaction.id !== transactionId));
         alert("Transaction deleted successfully.");
       } catch (error) {
@@ -143,7 +148,10 @@ const Dashboard = () => {
         {transactions.length > 0 && !showTransactionForm && !showPasswordForm && (
           <div className="text-center">
             {transactions.length > 0 && (
-              <DisposableIncome transactions={transactions}/>
+              <div>
+                <h4>{monthName} Income and Expenses</h4>
+                <DisposableIncome transactions={transactions}/>
+              </div>
             )}
             <h2>Your Transactions</h2>
 
@@ -266,4 +274,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default Dashboard;
