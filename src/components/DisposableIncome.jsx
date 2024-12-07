@@ -28,15 +28,7 @@ const DisposableIncome = ({transactions}) => {
         return transaction
       }
     });
-    
-    // const recentTotalIncome = transactions.filter((transaction) => {
-    //   const month = new Date(transaction.transaction_date).getMonth();
-    //   const year = new Date(transaction.transaction_date).getFullYear();
-    //   if(month === currentMonth && year === currentYear && transaction.transaction_type === "income"){
-    //     currentTotalIncome += parseFloat(transaction.amount);
-    //     return transaction
-    //   }
-    // })
+
     for(let transaction of transactions){
       const month = new Date(transaction.transaction_date).getMonth();
       const year = new Date(transaction.transaction_date).getFullYear();
@@ -61,31 +53,34 @@ const DisposableIncome = ({transactions}) => {
     datasets: [
       {
         backgroundColor: [
-          '#4CAF50', // Green for leftover income
+          '#4CAF50', 
           '#FF7043', 
-          '#FFCA28', 
+          '#FFEB3B',
           '#29B6F6', 
           '#AB47BC',
           '#FFA726',
-          '#66BB6A',
+          '#FF8A80',  
+          '#9C27B0'
         ],
         hoverBackgroundColor: [
-        '#66FF66',// Brighter green for leftover income
+        '#66FF66',
         '#FFCCBC', 
-        '#FFECB3',
+        '#FFF176',
         '#81D4FA', 
         '#D1C4E9',
-        '#FFE0B2', 
-        '#A5D6A7',
-      ],
+        '#FFF59D',
+        '#FF7F7F', 
+        '#D05CE3' 
+        ],
         borderColor: [
           '#388E3C',
           '#D84315', 
-          '#F57C00', 
+          '#FBC02D', 
           '#0277BD', 
           '#7B1FA2', 
           '#EF6C00',
-          '#2E7D32', 
+          '#D32F2F',
+          '#7B1FA2'
         ],
         borderWidth: 1,
         data: [disposableIncome, ...expenseCategoriesValues],

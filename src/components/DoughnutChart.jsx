@@ -15,7 +15,7 @@ const DoughnutChart = ({data}) => {
                 font: {
                   size: 14,
                 },
-                padding: 20, // Adds space between legend items
+                padding: 20, 
               },
             },
             tooltip: {

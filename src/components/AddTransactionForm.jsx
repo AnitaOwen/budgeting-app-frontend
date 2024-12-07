@@ -83,6 +83,7 @@ const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
               onChange={handleTextChange}
               required
             >
+              <option value="" disabled>Select A Category</option>
               <option value="" disabled>Expense Categories</option>
               <option value="Housing">Housing</option>
               <option value="Utilities">Utilities</option>
