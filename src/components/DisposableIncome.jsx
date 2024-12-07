@@ -29,14 +29,21 @@ const DisposableIncome = ({transactions}) => {
       }
     });
     
-    const recentTotalIncome = transactions.filter((transaction) => {
+    // const recentTotalIncome = transactions.filter((transaction) => {
+    //   const month = new Date(transaction.transaction_date).getMonth();
+    //   const year = new Date(transaction.transaction_date).getFullYear();
+    //   if(month === currentMonth && year === currentYear && transaction.transaction_type === "income"){
+    //     currentTotalIncome += parseFloat(transaction.amount);
+    //     return transaction
+    //   }
+    // })
+    for(let transaction of transactions){
       const month = new Date(transaction.transaction_date).getMonth();
       const year = new Date(transaction.transaction_date).getFullYear();
       if(month === currentMonth && year === currentYear && transaction.transaction_type === "income"){
         currentTotalIncome += parseFloat(transaction.amount);
-        return transaction
       }
-    })
+    }
 
     const expenseCategoryTotals = recentExpenses.reduce((acc, transaction) => {
       acc[transaction.category] = (acc[transaction.category] || 0) + parseFloat(transaction.amount);
@@ -50,11 +57,11 @@ const DisposableIncome = ({transactions}) => {
   }, [transactions]);
 
   const expenseChartData = {
-    labels: ['Disposable Income', ...expenseCategories],
+    labels: ['Leftover Income', ...expenseCategories],
     datasets: [
       {
         backgroundColor: [
-          '#4CAF50', // Green for disposable income
+          '#4CAF50', // Green for leftover income
           '#FF7043', 
           '#FFCA28', 
           '#29B6F6', 
@@ -63,7 +70,7 @@ const DisposableIncome = ({transactions}) => {
           '#66BB6A',
         ],
         hoverBackgroundColor: [
-        '#66FF66',// Brighter green for disposable income
+        '#66FF66',// Brighter green for leftover income
         '#FFCCBC', 
         '#FFECB3',
         '#81D4FA', 
@@ -89,7 +96,7 @@ const DisposableIncome = ({transactions}) => {
   return (
     <div className="card p-4 my-4 mx-2 justify-content-center d-flex">
       <div style={{ width: '400px', height: '450px'}}>
-        <h4 className="pb-2">{monthName} Income and Expenses</h4>
+        <h5 className="pb-2">{monthName} Financial Overview</h5>
         <DoughnutChart data={expenseChartData} />
       </div>
     </div>
