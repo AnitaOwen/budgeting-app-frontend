@@ -89,7 +89,7 @@ const DisposableIncome = ({transactions}) => {
   return (
     <div className="card p-4 my-4 mx-2 justify-content-center d-flex">
       <div style={{ width: '400px', height: '450px'}}>
-        <h4>{monthName} Income and Expenses</h4>
+        <h4 className="pb-2">{monthName} Income and Expenses</h4>
         <DoughnutChart data={expenseChartData} />
       </div>
     </div>
