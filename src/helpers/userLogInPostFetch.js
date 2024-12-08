@@ -16,10 +16,7 @@ const userLogInPostFetch = async (user) => {
       
     if (!res.ok) {
       if (res.status === 401) {
-        throw new Error("Incorrect email or password. \n Please try again");
-      }
-      if (res.status === 401) {
-        throw new Error("Incorrect username or password. \n Please try again");
+        throw new Error("Incorrect email or password.");
       }
       if (res.status === 400) {
         throw new Error("Email not verified. \n Please verify your email first.");
@@ -29,7 +26,6 @@ const userLogInPostFetch = async (user) => {
     const data = await res.json();
     return data
   } catch (error) {
-    console.error(error);
     throw error;
   }
 }

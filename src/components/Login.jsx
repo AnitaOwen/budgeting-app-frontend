@@ -37,7 +37,6 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.error(error.message);
       setErrorMessage(error.message); 
     }
   };
@@ -53,7 +52,6 @@ const Login = () => {
       await handleLoginResponse(data);
     } catch (error) {
       setErrorMessage(error.message);
-      console.error("Error during login:", error);
     } finally {
       setLoading(false);
     }
@@ -69,8 +67,7 @@ const Login = () => {
       const data = await userLogInPostFetch({ ...user, otp: user.otp });
       await handleLoginResponse(data);
     } catch (error) {
-      setErrorMessage("OTP verification failed. Please try again.");
-      console.error("Error during OTP verification:", error);
+      setErrorMessage("Verification failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -101,8 +98,7 @@ const Login = () => {
         setErrorMessage("Demo login failed.");
       }
     } catch (error) {
-      console.error("Error during demo login:", error);
-      setErrorMessage("An error occurred during demo login.");
+      setErrorMessage(error.message);
     } finally {
       setLoading(false);
     }
@@ -124,12 +120,12 @@ const Login = () => {
           </div>
 
           {errorMessage && (
-            <div className="alert alert-danger" role="alert">
+            <div className="alert alert-danger text-center" role="alert">
               {errorMessage}
             </div>
           )}
           {message && (
-            <div className="alert alert-success" role="alert">
+            <div className="alert alert-success text-center" role="alert">
               {message}
             </div>
           )}
@@ -173,7 +169,7 @@ const Login = () => {
                   required
                 />
                 <button className="btn btn-info btn-lg w-100" disabled={loading}>
-                  {loading ? "Verifying..." : "Verify OTP"}
+                  {loading ? "Verifying..." : "Submit"}
                 </button>
               </>
             )}

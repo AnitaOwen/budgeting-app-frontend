@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faTimes, faEdit, faCheck } from "@fortawesome/free-solid-svg-icons";
 import AddTransactionForm from './AddTransactionForm';
@@ -39,7 +40,7 @@ const Dashboard = () => {
     const { amount } = updatedTransaction;
 
     if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
-      alert("Please enter a valid positive number for the amount.");
+      toast.error("Please enter a valid positive number for the amount.")
       return;
     }
 
@@ -61,13 +62,13 @@ const Dashboard = () => {
       setEditableTransaction(null); 
       setTransactions(updatedTransactionsList)
     } catch (error) {
-      console.error('Error updating transaction:', error);
+      toast.error("Error updating transaction.")
     }
   };
 
   const handleDelete = async (transactionId) => {
     if (!token) {
-      alert("You must be logged in to delete transactions.");
+      toast.error("You must be logged in to delete transactions.")
       navigate("/login");
       return;
     }
@@ -79,9 +80,9 @@ const Dashboard = () => {
         }
 
         setTransactions(transactions.filter((transaction) => transaction.id !== transactionId));
-        alert("Transaction deleted successfully.");
+        toast.success("Transaction deleted successfully!");
       } catch (error) {
-        alert("An error occurred while trying to delete the transaction.");
+        toast.error("An error occurred while trying to delete the transaction.")
       }
     }
   };
@@ -107,7 +108,7 @@ const Dashboard = () => {
         const data = await response.json();
         setTransactions(data || []);
       } catch (error) {
-        console.error("Error fetching transactions:", error);
+        toast.error("Something went wrong, please try logging in again.")
       }
     };
 
@@ -147,9 +148,7 @@ const Dashboard = () => {
         {transactions.length > 0 && !showTransactionForm && !showPasswordForm && (
           <div className='container text-center'>
             {transactions.length > 0 && (
-              <div>
-                <DisposableIncome transactions={transactions}/>
-              </div>
+              <DisposableIncome transactions={transactions}/>
             )}
             <h2>Your Transactions</h2>
 

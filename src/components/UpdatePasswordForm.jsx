@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const UpdatePasswordForm = ({id, setShowPasswordForm}) => {
     const URL = import.meta.env.VITE_BASE_URL;
@@ -53,7 +54,7 @@ const UpdatePasswordForm = ({id, setShowPasswordForm}) => {
         event.preventDefault();
 
         if (!passwordMatch) {
-            alert("New password and confirm password must match.");
+            toast.error("New password and confirm password must match.")
             return;
         }
 
@@ -85,11 +86,10 @@ const UpdatePasswordForm = ({id, setShowPasswordForm}) => {
                     confirmPassword: "",
                 })
                 setMessage("Password updated successfully!"); 
-                // navigate(`/dashboard/${data.id}`)
                 
             }  
         } catch (error) {
-            console.error("Error updating password:", error);
+            toast.error("Incorrect password, Please try again.")
         } finally {
             setLoading(false);
             setShowPasswordForm(false);

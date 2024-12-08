@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const URL = import.meta.env.VITE_BASE_URL;
@@ -54,10 +55,10 @@ const Register = () => {
       const data = await res.json();
 
       if (data.message) {
-        alert(data.message);
+        toast.success(data.message);
       }
     } catch (error) {
-      console.error("Error during registration:", error);
+      toast.error("There is already an account with this email");
     }
   }
 

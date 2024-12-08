@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import DoughnutChart from "./DoughnutChart.jsx";
 
 
+
 const DisposableIncome = ({transactions}) => {
   const [disposableIncome, setDisposableIncome] = useState(0);
   const [expenseCategories, setExpenseCategories] = useState([]);

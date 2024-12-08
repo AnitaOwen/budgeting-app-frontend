@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
   const URL = import.meta.env.VITE_BASE_URL;
@@ -19,7 +20,7 @@ const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
     event.preventDefault();
 
     if (!newTransaction.amount || isNaN(newTransaction.amount) || parseFloat(newTransaction.amount) <= 0) {
-      alert("Please enter a valid positive number for the amount.");
+      toast.error("Please enter a valid positive number for the amount.")
       return;
     }
 
@@ -53,7 +54,8 @@ const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
       })
       setShowTransactionForm(false); 
     } catch (error) {
-      console.error("Error adding transaction:", error);
+      // console.error("Error adding transaction:", error);
+      toast.error("Failed to add transaction.");
     }
   }
   return (

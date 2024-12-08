@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 const FourOFour = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const id = localStorage.getItem("userId")
 
   const handleRedirect = () => {
-    if (token) {
-      navigate('/dashboard');
+    if (token && id) {
+      navigate(`/dashboard/${id}`);
     } else {
       navigate('/login');
     }

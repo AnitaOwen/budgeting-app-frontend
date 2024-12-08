@@ -4,7 +4,7 @@ const deleteTransaction = async (transactionId) => {
 
     try {
         if (!token) {
-            alert("You must be logged in to delete transactions.");
+            toast.error("You must be logged in to delete transactions.")
             navigate("/login");
             return;
         }
@@ -23,7 +23,7 @@ const deleteTransaction = async (transactionId) => {
         const deletedTransaction = await response.json(); 
         return deletedTransaction;
     } catch (error) {
-        console.error("Error deleting transaction:", error);
+        toast.error("Unable to delete transaction.")
         throw error;  
     }
 };
