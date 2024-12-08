@@ -145,7 +145,7 @@ const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
               className="form-control"
               id="amount"
               type="number"
-              step="0.01" 
+              step="0.01"
               value={newTransaction.amount}
               onChange={handleTextChange}
               placeholder="0.00"
