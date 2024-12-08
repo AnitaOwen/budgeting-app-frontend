@@ -6,6 +6,7 @@ import AddTransactionForm from './AddTransactionForm';
 import DisposableIncome from './DisposableIncome';
 import UpdatePasswordForm from './UpdatePasswordForm';
 import deleteTransaction from '../helpers/deleteTransaction';
+import formatDate from '../helpers/formatDate';
 
 const Dashboard = () => {
   const URL = import.meta.env.VITE_BASE_URL;
@@ -35,7 +36,7 @@ const Dashboard = () => {
   };
 
   const handleEditSubmit = async (event) => {
-    const { transaction_date, category, amount } = updatedTransaction;
+    const { amount } = updatedTransaction;
 
     if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
       alert("Please enter a valid positive number for the amount.");
@@ -187,7 +188,7 @@ const Dashboard = () => {
                             className="form-control"
                           />
                         ) : (
-                          new Date(transaction.transaction_date).toLocaleDateString()
+                          formatDate(transaction.transaction_date)
                         )}
                       </td>
                       <td>
