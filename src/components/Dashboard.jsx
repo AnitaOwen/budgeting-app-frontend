@@ -78,12 +78,9 @@ const Dashboard = () => {
           throw new Error("There was an issue deleting the transaction.")
         }
 
-        console.log(`Transaction ${transactionId} deleted successfully.`);
-
         setTransactions(transactions.filter((transaction) => transaction.id !== transactionId));
         alert("Transaction deleted successfully.");
       } catch (error) {
-        console.error("Error deleting transaction:", error);
         alert("An error occurred while trying to delete the transaction.");
       }
     }
@@ -91,7 +88,6 @@ const Dashboard = () => {
   
   useEffect(() => {
     if (!token) {
-      console.log("No token found, redirecting to login.");
       navigate("/login");
       return;
     }
@@ -188,7 +184,6 @@ const Dashboard = () => {
                             className="form-control"
                           />
                         ) : (
-                          // new Date(transaction.transaction_date).toISOString().split('T')[0]
                           formatDate(new Date(transaction.transaction_date).toISOString().split('T')[0])
                         )}
                       </td>

@@ -79,7 +79,6 @@ const UpdatePasswordForm = ({id, setShowPasswordForm}) => {
             const data = await response.json();
 
             if(data.id){
-                console.log("Password updated successfully!");
                 setFormData({
                     currentPassword: "",
                     newPassword: "",
@@ -91,7 +90,6 @@ const UpdatePasswordForm = ({id, setShowPasswordForm}) => {
             }  
         } catch (error) {
             console.error("Error updating password:", error);
-            console.log("Failed to update password. Please try again.");
         } finally {
             setLoading(false);
             setShowPasswordForm(false);

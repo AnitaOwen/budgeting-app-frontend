@@ -3,7 +3,6 @@ import './App.css';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import VerifyEmail from "./components/VerifyEmail";
-// import ProtectedRoute from "./components/ProtectedRoute";
 import FourOFour from "./components/FourOFour";
 import NavBar from './components/NavBar';
 import Home from "./components/Home.jsx";
@@ -19,8 +18,7 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register />} /> 
-      {/* <Route element={<ProtectedRoute />}> */}
-        <Route path="/dashboard/:id" element={<Dashboard />} />
+      <Route path="/dashboard/:id" element={<Dashboard />} />
       <Route path="/verify-email/:token" element={<VerifyEmail />} />
       <Route path="*" element={<FourOFour />} />
     </Routes>
