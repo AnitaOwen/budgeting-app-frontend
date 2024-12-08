@@ -20,6 +20,11 @@ const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!newTransaction.amount || isNaN(newTransaction.amount) || parseFloat(newTransaction.amount) <= 0) {
+      alert("Please enter a valid positive number for the amount.");
+      return;
+    }
+
     const transactionToSend = {
       ...newTransaction,
       amount: parseFloat(newTransaction.amount),
@@ -132,26 +137,6 @@ const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
                   <option value="Other Income">Other Income</option>
                 </>
               )}
-              {/* <option value="" disabled>Select A Category</option>
-              <option value="" disabled>Expense Categories</option>
-              <option value="Housing">Housing</option>
-              <option value="Utilities">Utilities</option>
-              <option value="Transportation">Transportation</option>
-              <option value="Food & Dining">Food & Dining</option>
-              <option value="Health & Wellness">Health & Wellness</option>
-              <option value="Shopping">Shopping</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Childcare">Childcare</option>
-              <option value="Travel">Insurance</option>
-              <option value="Debt Repayment">Debt Repayment</option>
-              <option value="Pets">Pets</option>
-              <option value="Other Expense">Other Expense</option>
-              <option value="" disabled>Income Categories</option>
-              <option value="Salary & Wages">Salary & Wages</option>
-              <option value="Investments">Investments</option>
-              <option value="Business Income">Business Income</option>
-              <option value="Government Benefits">Government Benefits</option>
-              <option value="Other Income">Other Income</option> */}
             </select>
           </div>
           <div className="mb-3">
@@ -159,7 +144,8 @@ const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
             <input 
               className="form-control"
               id="amount"
-              type="text"
+              type="number"
+              step="0.01" 
               value={newTransaction.amount}
               onChange={handleTextChange}
               placeholder="0.00"

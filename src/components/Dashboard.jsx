@@ -52,8 +52,6 @@ const Dashboard = () => {
         body: JSON.stringify(updatedTransaction),
       });
 
-      console.log("PUT response", response)
-
       if (!response.ok) {
         throw new Error('Failed to update transaction');
       }
