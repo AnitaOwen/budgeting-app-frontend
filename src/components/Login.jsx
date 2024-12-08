@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import userLogInPostFetch from "../helpers/userLogInPostFetch";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "", otp: ""});
@@ -32,7 +33,8 @@ const Login = () => {
         if (data.token) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("userId", data.user.id); 
-          setMessage("Login Success!");
+          // setMessage("Login Success!");
+          toast.success("Logged in successfully!")
           navigate(`/dashboard/${data.user.id}`);
         }
       }
@@ -66,6 +68,7 @@ const Login = () => {
     try {
       const data = await userLogInPostFetch({ ...user, otp: user.otp });
       await handleLoginResponse(data);
+
     } catch (error) {
       setErrorMessage("Verification failed. Please try again.");
     } finally {
@@ -93,6 +96,7 @@ const Login = () => {
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.user.id)
+        toast.success("Logged in successfully!")
         navigate(`/dashboard/${data.user.id}`);
       } else {
         setErrorMessage("Demo login failed.");
