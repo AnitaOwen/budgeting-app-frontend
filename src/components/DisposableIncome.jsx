@@ -90,13 +90,14 @@ const DisposableIncome = ({transactions}) => {
   };
 
   return (
-    <div className="card p-4 my-4 mx-2 justify-content-center d-flex">
-      <div style={{ width: '400px', height: '450px'}}>
-        <h5 className="pb-2">{monthName} Financial Overview</h5>
-        <DoughnutChart data={expenseChartData} />
+    <>
+      {expenseCategories.length > 0 && (
+        <div className="card p-4 my-4 mx-2 justify-content-center d-flex" style={{ width: '400px', height: '450px'}}>
+          <h5 className="pb-2">{monthName} Financial Overview</h5>
+          <DoughnutChart data={expenseChartData} />
       </div>
-    </div>
-  )
-}
+      )}
+    </>
+  )}
 
 export default DisposableIncome;
