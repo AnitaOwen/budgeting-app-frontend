@@ -150,7 +150,7 @@ const Dashboard = () => {
             {transactions.length > 0 && (
               <DisposableIncome transactions={transactions}/>
             )}
-            <h2>Your Transactions</h2>
+            <h2 className="mb-3">Your Transactions</h2>
 
             <table className="table table-striped table-bordered">
               <thead className="thead-dark">
