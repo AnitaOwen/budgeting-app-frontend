@@ -135,7 +135,7 @@ const Dashboard = () => {
       </div>
       {showPasswordForm && <UpdatePasswordForm id={id} setShowPasswordForm={setShowPasswordForm} />}
 
-      <div className="mt-4 mb-5">
+      <div className="mb-5">
         {transactions.length === 0 && (
           <>
           <h2>Your Transactions</h2>
@@ -148,11 +148,11 @@ const Dashboard = () => {
         {transactions.length > 0 && !showTransactionForm && !showPasswordForm && (
           <div className='container text-center'>
             {transactions.length > 0 && (
-              <DisposableIncome transactions={transactions}/>
+                <DisposableIncome transactions={transactions}/>
             )}
-            <h2 className="mb-3">Your Transactions</h2>
+            <h2 id="transactions-table" className="mb-3">Your Transactions</h2>
 
-            <table className="table table-striped table-bordered">
+            <table className="table table-sm table-striped table-bordered">
               <thead className="thead-dark">
                 <tr>
                   <th></th>

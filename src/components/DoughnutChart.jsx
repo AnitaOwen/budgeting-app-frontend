@@ -3,14 +3,14 @@ import { Doughnut } from 'react-chartjs-2';
 
 const DoughnutChart = ({data}) => {
   return (
-    <div className="chart">
+    <>
       <Doughnut
         data={data}
         options={{
           responsive: true,
           plugins: {
             legend: {
-              position: 'bottom',
+              position: 'right',
               labels: {
                 font: {
                   size: 14,
@@ -34,10 +34,18 @@ const DoughnutChart = ({data}) => {
               borderColor: '#ccc',
               borderWidth: 1,
             },
+            title: {
+              display: true,
+              text: 'Expense Distribution for This Month', // Change this to the desired title
+              font: {
+                size: 18,
+              },
+              color: '#333',
+            },
           },
         }}
       />
-    </div>
+    </>
   )
 }
 

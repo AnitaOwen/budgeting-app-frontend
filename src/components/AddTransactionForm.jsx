@@ -54,7 +54,6 @@ const AddTransactionForm = ({id, setTransactions, setShowTransactionForm}) => {
       })
       setShowTransactionForm(false); 
     } catch (error) {
-      // console.error("Error adding transaction:", error);
       toast.error("Failed to add transaction.");
     }
   }
