@@ -158,7 +158,7 @@ const Dashboard = () => {
                 <DisposableIncome transactions={transactions}/>
             )}
             <div id="transactions-table" className="d-flex gap-2 m-2">
-              <h3 className="mt-4">Your Transactions</h3>
+              <h3 className="mt-4 d-none d-md-block">Your Transactions</h3>
               <div className="ms-auto d-flex gap-2 py-3">
                 <button 
                   className={`btn ${filter === 'all' ? 'btn-info' : 'btn-light'}`} 
