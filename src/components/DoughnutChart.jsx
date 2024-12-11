@@ -13,7 +13,7 @@ const DoughnutChart = ({data}) => {
               position: 'right',
               labels: {
                 font: {
-                  size: 14,
+                  size: 12,
                 },
                 padding: 20, 
               },
@@ -38,7 +38,7 @@ const DoughnutChart = ({data}) => {
               display: true,
               text: 'Expense Distribution for This Month',
               font: {
-                size: 18,
+                size: 16,
               },
               color: '#333',
             },

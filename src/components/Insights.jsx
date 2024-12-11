@@ -45,7 +45,7 @@ const Insights = () => {
         <>
         {insights.length > 0 && (
             <div className="bg-light">
-                <p className="mx-4 p-4 fs-5" style={{lineHeight: "2rem"}}>{insights[currentIndex]}</p>
+                <h6 className="m-4 p-4" style={{lineHeight: "2rem"}}>{insights[currentIndex]}</h6>
             </div>
         )}
         </>

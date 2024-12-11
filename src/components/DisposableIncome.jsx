@@ -89,7 +89,7 @@ const DisposableIncome = ({transactions}) => {
   return (
     <>
       {expenseCategories.length > 0 && (
-        <div className="card my-3">
+        <div className="container mb-3">
           <p className="text-end mx-4">
             <span
             style={{
