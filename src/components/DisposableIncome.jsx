@@ -9,7 +9,6 @@ const DisposableIncome = ({transactions}) => {
   const [expenseCategoriesValues, setExpenseCategoriesValues] = useState([]);
 
   const today = new Date()
-  const monthName = today.toLocaleString('default', { month: 'long' });
 
   const scrollToTransactions = () => {
     const transactionsTable = document.getElementById("transactions-table");
@@ -19,7 +18,6 @@ const DisposableIncome = ({transactions}) => {
       });
     }
   };
-
 
   useEffect(() => {
 

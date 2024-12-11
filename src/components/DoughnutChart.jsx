@@ -36,7 +36,7 @@ const DoughnutChart = ({data}) => {
             },
             title: {
               display: true,
-              text: 'Expense Distribution for This Month', // Change this to the desired title
+              text: 'Expense Distribution for This Month',
               font: {
                 size: 18,
               },

@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token")
+  const id = localStorage.getItem("userId")
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -18,9 +20,11 @@ const NavBar = () => {
       <div className="container-fluid">
         <span className="navbar-brand mb-0 h1">Budgeting App</span>
         <div className="d-flex ms-auto">
-          <button className="btn btn-light" type="button" onClick={handleLogout} >
-              <FontAwesomeIcon icon={faSignOutAlt} />
-          </button>
+          {token && id &&(
+            <button className="btn btn-light" type="button" onClick={handleLogout} >
+                <FontAwesomeIcon icon={faSignOutAlt} />
+            </button>
+          )}
         </div>
       </div>
     </nav>

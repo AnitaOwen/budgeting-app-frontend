@@ -42,11 +42,13 @@ const Insights = () => {
     }, [insights.length]);
 
     return (
-        <div className="bg-light">
-            {insights.length > 0 && (
-                <p className="m-4 p-4" style={{lineHeight: "2rem"}}>{insights[currentIndex]}</p>
-            )}
-        </div>
+        <>
+        {insights.length > 0 && (
+            <div className="bg-light">
+                <p className="mx-4 p-4 fs-5" style={{lineHeight: "2rem"}}>{insights[currentIndex]}</p>
+            </div>
+        )}
+        </>
     );
 };
 
