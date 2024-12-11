@@ -20,6 +20,13 @@ const Dashboard = () => {
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [editableTransaction, setEditableTransaction] = useState(null); 
   const [updatedTransaction, setUpdatedTransaction] = useState({});
+  const [filter, setFilter] = useState('all');
+
+  const filteredTransactions = transactions.filter(transaction => {
+    if (filter === 'income') return transaction.transaction_type === 'income';
+    if (filter === 'expenses') return transaction.transaction_type === 'expense';
+    return true;
+  });
   
   const handleEditClick = (transaction) => {
     setEditableTransaction(transaction.id);
@@ -150,8 +157,29 @@ const Dashboard = () => {
             {transactions.length > 0 && (
                 <DisposableIncome transactions={transactions}/>
             )}
-            <h2 id="transactions-table" className="mb-3">Your Transactions</h2>
-
+            <div id="transactions-table" className="d-flex gap-2 m-2">
+              <h3 className="mt-4">Your Transactions</h3>
+              <div className="ms-auto d-flex gap-2 py-3">
+                <button 
+                  className={`btn ${filter === 'all' ? 'btn-info' : 'btn-light'}`} 
+                  onClick={() => setFilter('all')}
+                >
+                  All
+                </button>
+                <button 
+                  className={`btn ${filter === 'income' ? 'btn-info' : 'btn-light'}`} 
+                  onClick={() => setFilter('income')}
+                >
+                  Income
+                </button>
+                <button 
+                  className={`btn ${filter === 'expenses' ? 'btn-info' : 'btn-light'}`} 
+                  onClick={() => setFilter('expenses')}
+                >
+                  Expenses
+                </button>
+              </div>
+            </div>
             <table className="table table-sm table-striped table-bordered">
               <thead className="thead-dark">
                 <tr>
@@ -163,7 +191,7 @@ const Dashboard = () => {
                 </tr>
               </thead>
                 <tbody>
-                  {transactions.map((transaction) => (
+                  {filteredTransactions.map((transaction) => (
                     <tr key={transaction.id}>
                       <td>
                         <button
