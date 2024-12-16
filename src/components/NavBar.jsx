@@ -22,7 +22,7 @@ const NavBar = () => {
       <div className="container-fluid">
         <span className="navbar-brand mb-0 h1">Budgeting App</span>
         <div className="d-flex ms-auto">
-          {token && id && (
+          {token && (
             <button className="btn btn-light" type="button" onClick={handleLogout} >
                 <FontAwesomeIcon icon={faSignOutAlt} />
             </button>

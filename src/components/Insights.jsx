@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const Insights = () => {
+const Insights = ({transactions}) => {
     const [insights, setInsights] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const URL = import.meta.env.VITE_BASE_URL;
@@ -31,7 +31,7 @@ const Insights = () => {
 
         fetchInsights();
 
-    }, []);
+    }, [transactions]);
 
     useEffect(() => {
         const interval = setInterval(() => {

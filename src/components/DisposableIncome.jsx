@@ -88,7 +88,7 @@ const DisposableIncome = ({transactions}) => {
 
   return (
     <>
-      {expenseCategories.length > 0 && (
+      {disposableIncome !== 0 && (
         <div className="container mb-3">
           <p className="text-end mx-4">
             <span
@@ -104,7 +104,7 @@ const DisposableIncome = ({transactions}) => {
           <div className="card-body d-flex justify-content-center" style={{height: '400px'}}>
             <DoughnutChart data={expenseChartData} />
           </div>
-            <Insights/>
+            <Insights transactions={transactions}/>
         </div> 
       )}
   </>

@@ -143,7 +143,7 @@ const Dashboard = () => {
       {showPasswordForm && <UpdatePasswordForm id={id} setShowPasswordForm={setShowPasswordForm} />}
 
       <div className="mb-5">
-        {transactions.length === 0 && (
+        {transactions.length === 0 && !showTransactionForm && !showPasswordForm && (
           <>
             <h2>Your Transactions</h2>
             <div className="my-4 alert fs-8 alert-light text-center">

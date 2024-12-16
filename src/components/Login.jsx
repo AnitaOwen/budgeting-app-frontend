@@ -33,7 +33,6 @@ const Login = () => {
         if (data.token) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("userId", data.user.id); 
-          // setMessage("Login Success!");
           toast.success("Logged in successfully!")
           navigate(`/dashboard/${data.user.id}`);
         }
