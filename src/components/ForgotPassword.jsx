@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const InputEmail = ({setShowForgotPassword}) => {
+const ForgotPassword = ({setShowForgotPassword}) => {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState({});
@@ -33,8 +33,7 @@ const InputEmail = ({setShowForgotPassword}) => {
                 setMessage({ type: "error", text: data.message || "An error occurred." });
             }
         } catch(error) {
-            // setMessage({ type: "error", text: "Failed to send the request. Please try again later." })
-            console.log(error.message)
+            setMessage({ type: "error", text: "Failed to send the request. Please try again later." })
             console.error(error)
         } finally {
             setLoading(false)
@@ -77,4 +76,4 @@ const InputEmail = ({setShowForgotPassword}) => {
   )
 }
 
-export default InputEmail
+export default ForgotPassword;

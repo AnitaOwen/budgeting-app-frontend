@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import userLogInPostFetch from "../helpers/userLogInPostFetch";
-import InputEmail from "./InputEmail";
 import { toast } from "react-toastify";
+import ForgotPassword from "./ForgotPassword";
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "", otp: ""});
@@ -113,7 +113,7 @@ const Login = () => {
   return (
     <div className="min-vh-100 d-flex align-items-center p-3 bg-info bg-opacity-25">
       <div className="card shadow-sm mx-auto" style={{ width: "100%", maxWidth: "400px" }}>
-        {showForgotPassword ? <InputEmail setShowForgotPassword={setShowForgotPassword}/> : 
+        {showForgotPassword ? <ForgotPassword setShowForgotPassword={setShowForgotPassword}/> : 
         <div className="card-body p-3 p-sm-4">
           <h2 className="text-center mb-4 fs-3">Login</h2>
           <div className="text-center mb-4">
