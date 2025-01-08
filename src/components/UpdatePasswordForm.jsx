@@ -85,7 +85,7 @@ const UpdatePasswordForm = ({id, setShowPasswordForm}) => {
                     newPassword: "",
                     confirmPassword: "",
                 })
-                setMessage("Password updated successfully!"); 
+                toast.success("Password updated successfully!"); 
                 
             }  
         } catch (error) {
