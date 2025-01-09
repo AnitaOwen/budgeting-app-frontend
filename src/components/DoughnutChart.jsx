@@ -1,7 +1,7 @@
 
 import { Doughnut } from 'react-chartjs-2';
 
-const DoughnutChart = ({data}) => {
+const DoughnutChart = ({data, disposableIncome}) => {
   return (
     <>
       <Doughnut
@@ -36,7 +36,7 @@ const DoughnutChart = ({data}) => {
             },
             title: {
               display: true,
-              text: 'Expense Distribution for This Month',
+              text: `Expense Distribution for This Month ( $${disposableIncome} leftover income )`,
               font: {
                 size: 16,
               },

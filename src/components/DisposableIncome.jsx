@@ -4,7 +4,7 @@ import DoughnutChart from "./DoughnutChart.jsx";
 import Insights from "./Insights.jsx";
 
 const DisposableIncome = ({transactions}) => {
-  const [disposableIncome, setDisposableIncome] = useState(0);
+  const [disposableIncome, setDisposableIncome] = useState(null);
   const [expenseCategories, setExpenseCategories] = useState([]);
   const [expenseCategoriesValues, setExpenseCategoriesValues] = useState([]);
 
@@ -137,7 +137,7 @@ const DisposableIncome = ({transactions}) => {
 
   return (
     <>
-      {disposableIncome !== 0 && (
+      {disposableIncome && (
         <div className="container mb-3">
           <p className="text-end mx-4">
             <span
@@ -151,7 +151,7 @@ const DisposableIncome = ({transactions}) => {
             </span>
           </p>
           <div className="card-body d-flex justify-content-center" style={{height: '400px'}}>
-            <DoughnutChart data={expenseChartData} />
+            <DoughnutChart data={expenseChartData} disposableIncome={disposableIncome}/>
           </div>
             <Insights transactions={transactions}/>
         </div> 
