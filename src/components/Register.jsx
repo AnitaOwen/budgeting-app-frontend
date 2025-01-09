@@ -9,6 +9,9 @@ const Register = () => {
 
   const [user, setUser] = useState({ email: "", password: "", first_name: "", last_name: ""});
   const [passwordStrength, setPasswordStrength] = useState("");
+  const [message, setMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
   function handleChange(event) {
     setUser({ ...user, [event.target.id]: event.target.value });
@@ -39,6 +42,7 @@ const Register = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsSubmitting(true);
 
     const options = {
       method: "POST",
@@ -54,11 +58,13 @@ const Register = () => {
 
       const data = await res.json();
 
-      if (data.message) {
-        toast.success(data.message);
+      if (res.ok && data.message) {
+        setMessage(data.message);
+      } else {
+        setErrorMessage(data.message)
       }
     } catch (error) {
-      toast.error("There is already an account with this email");
+      setErrorMessage(error.message || "There is already an account with this email");
     }
   }
 
@@ -70,6 +76,17 @@ const Register = () => {
           <div className="text-center mb-4">
             Already have an account? <Link to="/login">Login</Link>
           </div>
+
+          {errorMessage && (
+            <div className="alert alert-danger text-center" role="alert">
+              {errorMessage}
+            </div>
+          )}
+          {message && (
+            <div className="alert alert-success text-center" role="alert">
+              {message}
+            </div>
+          )}
           
           <form onSubmit={handleSubmit}>
             <input
@@ -118,7 +135,7 @@ const Register = () => {
               autoComplete="family-name"
               required
             />
-            <button className="btn btn-info btn-lg w-100">Sign Up</button>
+            <button className="btn btn-info btn-lg w-100" disabled={isSubmitting}>Sign Up</button>
           </form>
           
         </div>
