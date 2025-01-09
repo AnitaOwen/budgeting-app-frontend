@@ -8,7 +8,9 @@ const DisposableIncome = ({transactions}) => {
   const [expenseCategories, setExpenseCategories] = useState([]);
   const [expenseCategoriesValues, setExpenseCategoriesValues] = useState([]);
 
-  const today = new Date()
+  // const [totalLeftoverIncome, setTotalLeftoverIncome] = useState(0);
+  // const [allExpenseCategories, setAllExpenseCategories] = useState([]);
+  // const [expenseCategoriesSumValues, setExpenseCategoriesSumValues] = useState([]);
 
   const scrollToTransactions = () => {
     const transactionsTable = document.getElementById("transactions-table");
@@ -48,12 +50,46 @@ const DisposableIncome = ({transactions}) => {
       acc[transaction.category] = (acc[transaction.category] || 0) + parseFloat(transaction.amount);
       return acc;
     }, {});
-    
+
     setDisposableIncome(currentTotalIncome - currentTotalExpenses);
     setExpenseCategories(Object.keys(expenseCategoryTotals))
     setExpenseCategoriesValues(Object.values(expenseCategoryTotals))
 
+    // let totalSumExpenses = 0;
+    // let totalSumIncome = 0;
+
+    // const totalExpenses = transactions.filter((transaction) => {
+    //   if(transaction.transaction_type === "expense"){
+    //     totalSumExpenses += parseFloat(transaction.amount);
+    //     return transaction
+    //   }
+    // });
+
+    // for(let transaction of transactions){
+    //   if(transaction.transaction_type === "income"){
+    //     totalSumIncome += parseFloat(transaction.amount);
+    //   }
+    // };
+
+    // const expenseCategorySumTotals = totalExpenses.reduce((acc, transaction) => {
+    //   acc[transaction.category] = (acc[transaction.category] || 0) + parseFloat(transaction.amount);
+    //   return acc;
+    // }, {});
+
+    // setTotalLeftoverIncome(totalSumIncome - totalSumExpenses);
+    // setAllExpenseCategories(Object.keys(expenseCategorySumTotals))
+    // setExpenseCategoriesSumValues(Object.values(expenseCategorySumTotals))
+
   }, [transactions]);
+
+  const nonGreenColors = [
+    '#FF5733', '#3357FF', '#FF33A1', '#FFD700', '#FF4500', 
+    '#8A2BE2', '#00CED1', '#7FFF00', '#FF69B4', '#DC143C'
+  ];
+  const lighterNonGreenColors = [
+    '#FF8363', '#637AFF', '#FF63B8', '#FFEA85', '#FF6F55', 
+    '#A97BE8', '#5FE7FF', '#B0FF7F', '#FF8ACC', '#FF6673'
+  ];
 
   const expenseChartData = {
     labels: ['Leftover Income', ...expenseCategories],
@@ -61,30 +97,43 @@ const DisposableIncome = ({transactions}) => {
       {
         backgroundColor: [
           '#4CAF50',
-          '#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A1FF33',
-          '#33A1FF', '#FF8C33', '#8C33FF', '#33FF8C', '#FF3333',
-          '#FFD700', '#FF4500', '#2E8B57', '#9400D3', '#20B2AA',
-          '#DC143C', '#8A2BE2', '#00CED1', '#FF69B4', '#7FFF00'
+          ...nonGreenColors.slice(0, expenseCategories.length)
         ],
         hoverBackgroundColor: [
           '#66FF66',
-          '#FF8363', '#70FF83', '#637AFF', '#FF63B8', '#C8FF63',
-          '#63C8FF', '#FFA05C', '#A863FF', '#63FFC8', '#FF6666',
-          '#FFE066', '#FF6347', '#5CB084', '#AE5EDB', '#46D5C5',
-          '#F56464', '#A46EFF', '#2CE7E7', '#FF85CB', '#A4FF5C'
+          ...lighterNonGreenColors.slice(0, expenseCategories.length)
         ],
         borderColor: [
           '#388E3C',
-          '#CC4629', '#29CC46', '#2946CC', '#CC2992', '#92CC29',
-          '#2992CC', '#CC7329', '#7329CC', '#29CC73', '#CC2929',
-          '#CCA600', '#CC3300', '#237246', '#6B00B1', '#17908D',
-          '#A50F30', '#6B1FB3', '#00A5A5', '#CC508E', '#64CC00'
+          ...nonGreenColors.slice(0, expenseCategories.length)
         ],
         borderWidth: 1,
         data: [disposableIncome, ...expenseCategoriesValues],
       },
     ],
   };
+
+  // const allExpensesTotalsChartData = {
+  //   labels: ['Leftover Income', ...allExpenseCategories],
+  //   datasets: [
+  //     {
+  //       backgroundColor: [
+  //         '#4CAF50',
+  //         ...nonGreenColors.slice(0, allExpenseCategories.length)
+  //       ],
+  //       hoverBackgroundColor: [
+  //         '#66FF66',
+  //         ...nonGreenColors.slice(0, allExpenseCategories.length)
+  //       ],
+  //       borderColor: [
+  //         '#388E3C',
+  //         ...nonGreenColors.slice(0, allExpenseCategories.length)
+  //       ],
+  //       borderWidth: 1,
+  //       data: [totalLeftoverIncome, ...expenseCategoriesSumValues],
+  //     },
+  //   ],
+  // };
 
   return (
     <>
