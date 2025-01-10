@@ -23,29 +23,29 @@ const DisposableIncome = ({transactions}) => {
 
   useEffect(() => {
 
-    const currentMonth = new Date().getMonth();
-    const currentYear = new Date().getFullYear(); 
+    const now = new Date();
+    const currentMonth = now.getUTCMonth(); 
+    const currentYear = now.getUTCFullYear();
 
     let currentTotalExpenses = 0;
     let currentTotalIncome = 0;
-    
+
     const recentExpenses = transactions.filter((transaction) => {
-      const month = new Date(transaction.transaction_date).getMonth();
-      const year = new Date(transaction.transaction_date).getFullYear();
-      if(month === currentMonth && year === currentYear && transaction.transaction_type === "expense"){
-        currentTotalExpenses += parseFloat(transaction.amount);
-        return transaction
+      const transactionDate = new Date(transaction.transaction_date);
+      const year = transactionDate.getUTCFullYear();
+      const month = transactionDate.getUTCMonth();
+  
+      if (month === currentMonth && year === currentYear) {
+        if (transaction.transaction_type === "income") {
+          currentTotalIncome += parseFloat(transaction.amount);
+        } else {
+          currentTotalExpenses += parseFloat(transaction.amount);
+          return true;
+        }
       }
+      return false;
     });
-
-    for(let transaction of transactions){
-      const month = new Date(transaction.transaction_date).getMonth();
-      const year = new Date(transaction.transaction_date).getFullYear();
-      if(month === currentMonth && year === currentYear && transaction.transaction_type === "income"){
-        currentTotalIncome += parseFloat(transaction.amount);
-      }
-    }
-
+    
     const expenseCategoryTotals = recentExpenses.reduce((acc, transaction) => {
       acc[transaction.category] = (acc[transaction.category] || 0) + parseFloat(transaction.amount);
       return acc;
