@@ -25,12 +25,12 @@ const Login = () => {
           setMessage(data.message);
         } 
         if (data.message === "Invalid or expired OTP.") {
-          setErrorMessage("Invalid or expired OTP.");
-          throw new Error("Invalid or expired OTP. Please Try Again.");
+          setErrorMessage("Invalid or expired OTP. Please Try Again.");
+          // throw new Error("Invalid or expired OTP. Please Try Again.");
         }
         if (data.message === "Invalid credentials") {
-          setErrorMessage("Incorrect username or password.");
-          throw new Error("Invalid credentials");
+          setErrorMessage("Incorrect email or password.");
+          // throw new Error("Invalid credentials");
         }
         if (data.token) {
           localStorage.setItem("token", data.token);
@@ -48,16 +48,19 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     setMessage(null);
-    setErrorMessage(null)
+    setErrorMessage(null);
 
     try {
       const data = await userLogInPostFetch(user);
+      if(data.message){
+        setErrorMessage(data.message)
+      }
       await handleLoginResponse(data);
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
       setLoading(false);
-    }
+    };
   };
 
   const handleOtpSubmit = async (e) => {
@@ -68,6 +71,9 @@ const Login = () => {
 
     try {
       const data = await userLogInPostFetch({ ...user, otp: user.otp });
+      if(data.message){
+        setErrorMessage(data.message)
+      };
       await handleLoginResponse(data);
 
     } catch (error) {

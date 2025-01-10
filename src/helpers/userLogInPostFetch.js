@@ -16,10 +16,10 @@ const userLogInPostFetch = async (user) => {
       
     if (!res.ok) {
       if (res.status === 401) {
-        throw new Error("Incorrect email or password.");
+        throw new Error('Password is incorrect');
       }
       if (res.status === 400) {
-        throw new Error("Email not verified. \n Please verify your email first.");
+        throw new Error("Please check your email or spam inbox for a link to verify your email first");
       }
     }
 
