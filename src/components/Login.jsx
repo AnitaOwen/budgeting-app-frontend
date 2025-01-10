@@ -29,8 +29,8 @@ const Login = () => {
           // throw new Error("Invalid or expired OTP. Please Try Again.");
         }
         if (data.message === "Invalid credentials") {
-          setErrorMessage("Incorrect email or password.");
-          // throw new Error("Invalid credentials");
+          setErrorMessage("Password is incorrect. Please try again.");
+          // throw new Error("Password is incorrect. Please try again.");
         }
         if (data.token) {
           localStorage.setItem("token", data.token);
@@ -52,9 +52,6 @@ const Login = () => {
 
     try {
       const data = await userLogInPostFetch(user);
-      if(data.message){
-        setErrorMessage(data.message)
-      }
       await handleLoginResponse(data);
     } catch (error) {
       setErrorMessage(error.message);
@@ -71,11 +68,7 @@ const Login = () => {
 
     try {
       const data = await userLogInPostFetch({ ...user, otp: user.otp });
-      if(data.message){
-        setErrorMessage(data.message)
-      };
       await handleLoginResponse(data);
-
     } catch (error) {
       setErrorMessage("Verification failed. Please try again.");
     } finally {
