@@ -147,8 +147,8 @@ const Dashboard = () => {
           <>
             <h2>Your Transactions</h2>
             <div className="my-4 alert fs-8 alert-light text-center">
-              <p>You haven't made any transactions yet.</p>
-              <button onClick={() => setShowTransactionForm(true)}>Start adding transactions to track your spending.</button>
+              <p className="mt-4">You haven't made any transactions yet.</p>
+              <button className="btn btn-link p-0 mb-4" onClick={() => setShowTransactionForm(true)}>Start adding transactions to track your spending.</button>
             </div>
           </>
         )}
