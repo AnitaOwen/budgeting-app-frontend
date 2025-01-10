@@ -211,7 +211,7 @@ const Dashboard = () => {
                             className="form-control"
                           />
                         ) : (
-                          formatDate(new Date(transaction.transaction_date).toISOString().split('T')[0])
+                          formatDate(transaction.transaction_date)
                         )}
                       </td>
                       <td>
