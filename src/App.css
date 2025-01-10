@@ -1,3 +1,8 @@
+.btn-light-red-hover:hover {
+  background-color: #ffe6e6; 
+  color: #dc3545; 
+}
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;

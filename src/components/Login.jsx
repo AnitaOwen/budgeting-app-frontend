@@ -96,7 +96,7 @@ const Login = () => {
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.user.id)
-        toast.success("Logged in successfully!")
+        // toast.success("Logged in successfully!")
         navigate(`/dashboard/${data.user.id}`);
       } else {
         setErrorMessage("Demo login failed.");

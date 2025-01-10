@@ -195,7 +195,7 @@ const Dashboard = () => {
                     <tr key={transaction.id}>
                       <td>
                         <button
-                          className="btn btn-sm btn-light"
+                          className="btn btn-sm btn-light btn-light-red-hover"
                           onClick={() => handleDelete(transaction.id)}
                         >
                           <FontAwesomeIcon icon={faTimes} />
