@@ -45,7 +45,7 @@ const DisposableIncome = ({transactions}) => {
       }
       return false;
     });
-    
+
     const expenseCategoryTotals = recentExpenses.reduce((acc, transaction) => {
       acc[transaction.category] = (acc[transaction.category] || 0) + parseFloat(transaction.amount);
       return acc;
@@ -151,7 +151,7 @@ const DisposableIncome = ({transactions}) => {
             </span>
           </p>
           <div className="card-body d-flex justify-content-center" style={{height: '400px'}}>
-            <DoughnutChart data={expenseChartData} disposableIncome={disposableIncome}/>
+            <DoughnutChart data={expenseChartData} disposableIncome={disposableIncome} expenseCategoriesValues={expenseCategoriesValues}/>
           </div>
             <Insights transactions={transactions}/>
         </div> 
