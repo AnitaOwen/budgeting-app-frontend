@@ -25,7 +25,7 @@ const Insights = ({transactions}) => {
                 const data = await response.json();
                 setInsights(JSON.parse(data));
             } catch (error) {
-                toast.error(error.message);
+                console.error(error)
             }
         };
 
